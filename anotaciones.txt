@@ -1,0 +1,45 @@
+// # Sacar sección de Novedades (van a ir en slideshows)
+// # Revisar botonera para darle color y más vida
+// # Fuentes reducir en general (porcentaje)
+// # Campo Matrícula Profesional en Contacto
+// # Incrementos Aranceles = Cambiar "validez" por "vigencia" y sacar el porcentaje
+// # Boton para "Mi Cuenta"
+// # Ajustar display de telefonos de whatsapp en el pie
+// # Cambiar "Formación" por "Cursos y Congresos"
+// # Fusionar página de DASO con página de Beneficios
+// # Menu Auditoría: Incremento Aranceles, Novedades OS, APROSS, Autorizadores, Verificadores
+// # Modificar cantidad de artículos por pantalla de presentación "Pedidos"
+// # Agregar a Solicitud de Constancia para Jubilados aclaración para beneficios DASO
+// # Sección Fondo Compensador: sacar tabla de total aportes requeridos
+// # Sección subsidios: armar sidebar especializada, importar iconos de la web anterior, revisar tema espacios, utilizar como referencia para resto de secciones
+// # Formatear sección de Seguro
+// # Reintegro de Farmacia ponerlo aparte en una página
+// # Libre Deuda / Saldo Negativo
+// # Formulario libre deuda con adjunto comprobante de pago y envío a tesorería
+// # Quienes somos - PDF del estatuto
+// # Quienes somos - Autoridades
+// # Circulos Odontológicos hipervinculos sobre logos
+// # Cursos y Congresos: cargar el de APACOC y dejarme algo armado para que yo vaya cargando las imagenes, y textos
+// # Alta/Baja de FOPC https://www.fopc.com.ar/altabaja_fopc.htm
+// # DES (debería ir debajo de FOPC en el menú) y actualizar la info. Ver q hay un formulario de contacto a "dipe" y es des
+// # Resoluciones C.E y Consejo Asesor tambien falta de hacer y adjuntar pdf
+// # Sección de Convenios Vigentes
+// # Presentación de Facturación https://www.fopc.com.ar/presentacionfacturacion.htm
+// # Formato Digital para Radiografías https://www.fopc.com.ar/radiografias_digitales.htm
+// # Circulos Odontológicos - Agregar en el título "Circulos Odontologicos de la Provincia de Córdoba" 
+// # Saldo negativo - El formulario de pedido de libre deuda y carga de comprobantes ponele un titulo porfa "Carga de Comprobante de pago/Solicitud Libre Deuda"
+// # En lo del Fondo Compensador, el Reglamento te lo paso para ponerlo en formato PDF. 
+// # En la pagina del seguro recorda lo de los logos, y falta el cuadro de solicitud de pedido de poliza. Tiene que ir dirigido al email gsequeira@mediterraneaseguros.com.ar
+// # En orden del menu desplegable de DASO esto del Seguro si puede ser, que vaya Ultimo.
+// # Último mes abonado (formato listo; revisar tema coloreo de celdas)
+// # Valores de aportes Caja de Previsión Social (LAYOUT A RESOLVER POR ANCHO)
+
+# De la página de DIPE/Pedidos de imprenta te voy a estar pasando las fotos para poner en los productos que se venden. 
+# Presentación de facturación, si podes agregale el bloque carrusel con los logos de las obras sociales abajo y el el titulo, poner el Año 2023
+# Encuentro deportivo https://www.fopc.com.ar/encuentrodeportivo2023.htm 
+# Espacio de FedClasificados en menú DIPE
+# Logotipos de Beneficios
+# Agregar matrícula a debitar en pantalla facturación (Tienda)
+# Revisar esquema de articulos personalizados para Imprenta (Tienda)
+# Habilitar en el checkout para personalizados upload de imagenes solamente en trabajos no realizados [radio tag] (Tienda)
+# Consultar con Micaela el uso de botones para contacto en sección Círculos

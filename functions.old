@@ -1,0 +1,516 @@
+<?php
+
+// style and scripts
+add_action('wp_enqueue_scripts', 'bootscore_child_enqueue_styles');
+function bootscore_child_enqueue_styles() {
+
+  // style.css
+  wp_enqueue_style('parent-style', get_template_directory_uri() . '/style.css');
+
+  // Compiled main.css
+  $modified_bootscoreChildCss = date('YmdHi', filemtime(get_stylesheet_directory() . '/css/main.css'));
+  wp_enqueue_style('main', get_stylesheet_directory_uri() . '/css/main.css', array('parent-style'), $modified_bootscoreChildCss);
+
+  // Slick Carousel CSS
+  wp_enqueue_style('slick', get_stylesheet_directory_uri() . '/css/slick/slick.css', array());
+  wp_enqueue_style('slick-theme', get_stylesheet_directory_uri() . '/css/slick/slick-theme.css', array('slick'));
+
+  // Slick Carousel JS
+  wp_enqueue_script('slick', get_stylesheet_directory_uri() . '/js/slick.min.js', array('jquery'), '', true);
+  
+  // custom.js
+  wp_enqueue_script('custom-js', get_stylesheet_directory_uri() . '/js/custom.js', array('jquery'), '', true);
+
+  // Filtro Beneficios
+  if(is_page('beneficios')):
+    wp_enqueue_script('beneficios', get_stylesheet_directory_uri() . '/js/beneficios.js', array('jquery'), '', true);
+  endif;
+
+  if(is_page('saldo-negativo')):
+    wp_enqueue_script('form-pago-saldo', get_stylesheet_directory_uri() . '/js/form-pago-saldo.js', array('jquery'), '', true);
+  endif;
+}
+
+
+// Custom Sidebars
+if (!function_exists('custom_sidebars_init')) :
+  function custom_sidebars_init() {
+    register_sidebar(array(
+      'name'          => esc_html__('Sidebar Novedades OS', 'bootscore'),
+      'id'            => 'sidebar-nos',
+      'description'   => 'Widgets de archivo Novedades Obras Sociales.',
+      'before_widget' => '<section id="%1$s" class="widget %2$s card card-body mb-4 bg-dark text-light border-0">',
+      'after_widget'  => '</section>',
+      'before_title'  => '<h2 class="h3 widget-title card-title py-2">',
+      'after_title'   => '</h2>',
+    ));
+
+    register_sidebar(array(
+      'name'          => esc_html__('Sidebar DIPE', 'bootscore'),
+      'id'            => 'sidebar-dipe',
+      'description'   => 'Widgets para páginas del DIPE',
+      'before_widget' => '<section id="%1$s" class="widget %2$s card card-body mb-4 bg-dark text-light border-0">',
+      'after_widget'  => '</section>',
+      'before_title'  => '<h2 class="h3 widget-title card-title py-2">',
+      'after_title'   => '</h2>',
+    ));
+
+    register_sidebar(array(
+      'name'          => esc_html__('Sidebar DASO', 'bootscore'),
+      'id'            => 'sidebar-daso',
+      'description'   => 'Widgets para páginas del DASO',
+      'before_widget' => '<section id="%1$s" class="widget %2$s card card-body mb-4 bg-dark text-light border-0">',
+      'after_widget'  => '</section>',
+      'before_title'  => '<h2 class="h3 widget-title card-title py-2">',
+      'after_title'   => '</h2>',
+    ));
+
+    register_sidebar(array(
+      'name'          => esc_html__('Sidebar FOPC', 'bootscore'),
+      'id'            => 'sidebar-fopc',
+      'description'   => 'Widgets para páginas base del FOPC',
+      'before_widget' => '<section id="%1$s" class="widget %2$s card card-body mb-4 bg-dark text-light border-0">',
+      'after_widget'  => '</section>',
+      'before_title'  => '<h2 class="h3 widget-title card-title py-2">',
+      'after_title'   => '</h2>',
+    ));
+  }
+
+endif;
+
+add_action('widgets_init', 'custom_sidebars_init');
+
+// Custom Widgets
+if (!function_exists('custom_widgets_init')) :
+
+  function custom_widgets_init() {
+    // Top Nav
+    register_sidebar(array(
+      'name'          => esc_html__('Top Nav', 'bootscore'),
+      'id'            => 'top-nav',
+      'description'   => esc_html__('Add widgets here.', 'bootscore'),
+      'before_widget' => '<div class="ms-1">',
+      'after_widget'  => '</div>',
+      'before_title'  => '<div class="widget-title d-none">',
+      'after_title'   => '</div>'
+    ));
+    // Top Nav End
+  }
+endif;
+
+add_action('widgets_init','custom_widgets_init',11);
+
+// Register and init custom menus
+if(!function_exists('custom_menus_init')):
+  function custom_menus_init() {
+    register_nav_menus( array(
+        'menu-archivo-nos'    => 'Archivo Novedades OS',
+        'menu-sidebar-dipe'   => 'Sidebar DIPE',
+        'menu-sidebar-daso'   => 'Sidebar DASO',
+        'menu-sidebar-fopc'   => 'Sidebar FOPC'
+    ));
+  }
+endif;
+
+add_action('after_setup_theme', 'custom_menus_init');
+
+// ------------
+// Agrega clase "list-group-item" a los tags <li> de los menues en sidebar para matchear clase "list-group" del tag <ul>
+// ------------
+function custom_menu_widget_class( $classes, $item, $args ) {
+  if ($args->theme_location === 'menu-archivo-nos' ||
+      $args->theme_location === 'menu-sidebar-dipe' ||
+      $args->theme_location === 'menu-sidebar-daso' ||
+      $args->theme_location === 'menu-sidebar-fopc' ):
+    $classes[] = 'list-group-item bg-transparent';
+  endif;
+
+  return $classes;
+}
+
+add_filter( 'nav_menu_css_class', 'custom_menu_widget_class', 10, 4);
+
+// ------------
+// Agrega clase "link-light" a los tags <a> dentro de los <li> de los menues sidebar para matchear la clase bg-dark del widget
+// ------------
+function custom_menu_widget_a_class( $atts, $item, $args ) {
+  
+  // Revisa el punto de inserción de los menúes para verificar que sean sidebar
+  if ($args->theme_location === 'menu-archivo-nos' ||
+      $args->theme_location === 'menu-sidebar-dipe' ||
+      $args->theme_location === 'menu-sidebar-daso' ||
+      $args->theme_location === 'menu-sidebar-fopc' ):
+    $atts['class'] = 'link-light';
+  endif;
+
+  return $atts;
+}
+
+add_filter( 'nav_menu_link_attributes', 'custom_menu_widget_a_class', 10, 3 );
+
+// ------------
+// Shortcode para presentacion de custom-post-types
+// ------------
+function loop_custom_post_type($atts) {
+  ob_start();
+
+  extract(shortcode_atts( array(
+    'type' => 'post'
+  ), $atts));
+
+  $args = array(
+    'post_type' => $type,
+    'posts_per_page' => 10,
+    'order' => 'DESC'
+  );
+  
+  $query = new WP_Query($args);
+  
+  if ($query->have_posts()) {
+    $counter = 1;
+
+		$last_post = $query->post_count;
+    
+    while ($query->have_posts()) {
+      $query->the_post();
+
+      $terms = get_the_terms(get_the_ID(), 'obras-sociales');
+
+      $obras_sociales = [];
+
+      foreach ($terms as $term) {
+        array_push($obras_sociales, $term->name);
+      }
+
+      $obra_social = join(', ', $obras_sociales);
+
+      if($counter != $last_post):
+        echo '<div class="border-bottom border-light mb-3 pb-1 novedad-os">';
+      else:
+        echo '<div class="mb-3 pb-1 novedad-os">';
+      endif;
+
+      echo '<a class="link-light text-decoration-none" href="' . get_permalink() . '" target="_blank" rel="noopener">';
+      echo '<span class="d-block text-uppercase opacity-75 lh-1">' . get_the_date() . '</span>';
+      echo '<h3 class="h6 lh-base">' . $obra_social .  ' | <span class="fw-normal">' . get_the_title() . '</span></h3>';
+      echo '</a>';
+      echo '</div>';
+
+      $counter++;
+    }
+    
+    wp_reset_postdata(); // Restablece los datos del post original
+  } else {
+    echo '<p>No se encontró contenido de esta sección.</p>';
+  }
+
+  $output = ob_get_clean();
+
+  return $output;
+}
+
+add_shortcode('show-cpt-posts', 'loop_custom_post_type');
+
+// ------------
+// Shortcode para presentación de últimos 10 incrementos de aranceles
+// ------------
+function loop_incremento_aranceles($atts) {
+  ob_start();
+  
+  $atts = shortcode_atts( array(
+    'anio'    => strval(date('Y')),
+    'nromes'  => strval(date('m'))
+  ), $atts);
+
+    $args = array(
+      'post_type'       => 'incrementos',
+      'nopaging'        => true,
+      'order'           => 'DESC',
+      'meta_query'     => array(
+          array(
+              'key'     => 'fecha_vigencia',
+              'value'   => $atts['anio'] . $atts['nromes'],
+              'compare' => 'LIKE'
+          )
+      )
+    );
+  
+  $query = new WP_Query($args);
+
+  if ($query->have_posts()) {
+    echo '<table class="table">';
+    echo '<thead>';
+    echo '<tr>';
+    echo '<th scope="col">Obra Social</th>';
+    echo '<th scope="col">Nro</th>';
+    echo '<th scope="col">Publicación</th>';
+    echo '<th scope="col">Vigencia</th>';
+    echo '</tr>';
+    echo '<thead>';
+    echo '<tbody class="table-group-divider">';
+
+    while ($query->have_posts()) {
+      $query->the_post();
+
+      $terms = get_the_terms(get_the_ID(), 'obras-sociales');
+
+      $obras_sociales = [];
+
+      foreach ($terms as $term) {
+        array_push($obras_sociales, $term->name);
+      }
+
+      $obra_social = join(', ', $obras_sociales);
+      $fecha_publicacion = get_the_date('d/m/Y');
+      $fecha_vigencia = get_field('fecha_vigencia');
+      $detalle_os = get_field('detalle-os');
+      $codigo = get_field('codigo');
+
+      echo '<tr>';
+      echo '<td>' . $obra_social . '<small class="ms-1 opacity-75">' . $detalle_os . '</small></td>';
+      echo '<td>' . $codigo . '</td>';
+      echo '<td>' . $fecha_publicacion . '</td>';
+      echo '<td>' . $fecha_vigencia . '</td>';
+      echo '</tr>';
+    }
+    
+    echo '</tbody>';
+    echo '</table>';
+
+    wp_reset_postdata(); // Restablece los datos del post original
+  } else {
+    echo '<p>No se encontró contenido de esta sección.</p>';
+  }
+
+  $output = ob_get_clean();
+
+  return $output;
+}
+
+add_shortcode('incremento-aranceles', 'loop_incremento_aranceles');
+
+// ============
+// Shortcode para display de incrementos en front-page
+// ============
+function loop_incremento_aranceles_front() {
+  ob_start();
+  
+  // Argumentos para front-page, donde se muestran los 12 registros más recientes y ninguno más
+    $args = array(
+      'post_type'       => 'incrementos',
+      'posts_per_page'  => 12,
+      'order'           => 'DESC',
+    );
+  
+  echo '<div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-5 px-5 mb-5">';
+  
+  $query = new WP_Query($args);
+
+  if ($query->have_posts()) {
+    while ($query->have_posts()) {
+      $query->the_post();
+
+      $terms = get_the_terms(get_the_ID(), 'obras-sociales');
+
+      $obras_sociales = [];
+
+      foreach ($terms as $term) {
+        array_push($obras_sociales, $term->name);
+      }
+
+      $obra_social = join(', ', $obras_sociales);
+      $fecha_publicacion = get_the_date('d/m/Y');
+      $fecha_vigencia = get_field('fecha_vigencia');
+      $detalle_os = get_field('detalle-os');
+      $codigo = get_field('codigo');
+
+      echo '<div class="col">';
+      echo '<div class="card h-100 text-center border-warning">';
+      echo '<div class="card-header bg-warning text-light"><small>Vigente desde el ' . $fecha_vigencia . '</small></div>';
+      echo '<div class="card-body d-flex flex-column justify-content-center">';
+      echo '<h3 class="card-title h5 text-primary">' . $obra_social . '</h3>';
+      echo '<p class="card-text text-secondary mb-0">' . $codigo . '</p>';
+      if( !empty($detalle_os) ): // Dato no obligatorio, chequea que esté antes de escribir la <p> correspondiente
+        echo '<p class="card-text mb-0">' . $detalle_os . '</p>';
+      endif;
+      echo '</div>'; // </card body>
+      echo '<div class="card-footer"><small>Publicado el ' . $fecha_publicacion . '</small></div>';
+      echo '</div>'; // </card>
+      echo '</div>'; // </col>
+    }
+
+    echo '</div>'; // </row>
+    wp_reset_postdata(); // Restablece los datos del post original
+  } else {
+    echo '<p>No se encontró contenido de esta sección.</p>';
+  }
+
+  $output = ob_get_clean();
+
+  return $output;
+}
+
+add_shortcode('incremento-aranceles-front', 'loop_incremento_aranceles_front');
+
+// ------------
+// Shortcode para presentacion de custom-post-types
+// ------------
+function loop_circulos_odontologicos() {
+  ob_start();
+
+  $args = array(
+    'post_type' => 'circulos',
+    'meta_key'  => 'id_circulo',
+    'orderby'   => 'meta_value_num',
+    'order'     => 'ASC',
+    'nopaging'  => true
+  );
+  
+  $query = new WP_Query($args);
+  
+  if ($query->have_posts()) {
+    echo '<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4">';
+    
+    while ($query->have_posts()) {
+      $query->the_post();
+
+      $id_circulo = get_field('id_circulo');
+      $nombre = get_the_title();
+      $logo = get_field('logo');
+      $website = get_field('website');
+      $presidente = get_field('presidente');
+      $direccion = get_field('direccion');
+      $telefono = get_field('telefono');
+      $whatsapp = get_field('whatsapp');
+      $email = get_field('email');
+      $jurisdiccion = get_field('jurisdiccion');
+
+      echo '<div class="col mb-5">';
+      echo '<div class="card h-100 border border-0 mb-3">';
+      echo '<img class="card-img-top px-5 pb-3" src="' . $logo . '">';
+      echo '<div class="card-body d-flex flex-column align-items-start">';
+      echo '<h5 class="card-title">' . $id_circulo . ' - ' . $nombre . '</h5>';
+      
+      if (! empty($website)): // Chequea que haya un website cargado
+      echo '<p class="card-text"><a href="' . $website . '">' . $website . '</a></p>';
+      endif;
+
+      echo '<p class="card-text"><strong>Presidente</strong> ' . $presidente . '</p>';
+      echo '<p class="card-text"><i class="fas fa-home fa-fw"></i> ' . $direccion . '</p>';
+      
+      if (! empty($telefono)): // Chequea que haya un teléfono cargado
+        echo '<p class="card-text"><i class="fas fa-phone-square fa-fw"></i> ' . $telefono . '</p>';
+      endif;
+      
+      if (! empty($whatsapp)): // Chequea que haya un Whatsapp cargado
+        echo '<p class="card-text"><i class="fab fa-whatsapp fa-fw"></i> <a href="https://wa.me/' . $whatsapp . '" target="_blank">' . $whatsapp . '</a></p>';
+      endif;
+      
+      echo '<p class="card-text"><i class="fas fa-at fa-fw"></i> <a href="mailto:' . $email . '" target="_blank">' . $email . '</a></p>';
+      echo '<p><button class="btn btn-outline-dark" type="button" data-bs-toggle="collapse" data-bs-target="#jurisdiccion-' . $id_circulo . '" aria-expanded="false" aria-controls="jurisdiccion-' . $id_circulo . '">Ver jurisdicción <i class="fas fa-caret-down"></i></button></p>';
+      echo '<p class="card-text collapse" id="jurisdiccion-' . $id_circulo . '">' . $jurisdiccion . '</p>';
+      echo '</div>'; // .card-body
+      echo '</div>'; // .card.h100
+      echo '</div>'; // .col.mb-4
+    }
+    
+    echo '</div>'; // .row
+    
+    wp_reset_postdata(); // Restablece los datos del post original
+  } else {
+    echo '<p>No se encontró contenido de esta sección.</p>';
+  }
+
+  $output = ob_get_clean();
+
+  return $output;
+}
+
+add_shortcode('circulos-odontologicos', 'loop_circulos_odontologicos');
+
+
+// ----------
+// Personalización de columnas en lista de Incrementos
+// ----------
+function incrementos_posts_columns($columns) {
+  // Retira las columnas por defecto de autor y título
+  unset(
+    $columns['author'],
+    $columns['title'],
+  );
+  
+  // Crea las nuevas columnas para agregar en la lista de posts cpt
+  $new_columns = array(
+    'cb'              => $columns['cb'],
+    'obras_sociales'  => 'Obras Sociales',
+    'date'            => $columns['date'],
+    'fecha_vigencia'  => 'Entrada en Vigencia',
+    'codigo'          => 'Número Código'
+  );
+
+  return array_merge($new_columns);
+}
+
+add_filter('manage_incrementos_posts_columns', 'incrementos_posts_columns');
+
+// ----------
+// Columnas personalizadas para custom-post-types en área administrativa
+// ----------
+function incrementos_posts_custom_column( $column, $post_id ) {
+  switch ($column) {
+    case 'obras_sociales':
+      $terms = get_the_terms($post_id,'obras-sociales');
+      
+      $terms_proc = [];
+      
+      foreach ($terms as $term) {
+        array_push($terms_proc, $term->name);
+      }
+      
+      $obras_sociales = join(', ', $terms_proc);
+      
+      echo '<a class="row-title" href="' . get_permalink() . '">' . $obras_sociales . '</a>';
+    break;
+    
+    case 'fecha_vigencia':
+      echo get_field('fecha_vigencia', $post_id);
+    break;
+
+    case 'codigo':
+      echo get_field('codigo', $post_id);
+    break;
+  }
+}
+
+add_action( "manage_incrementos_posts_custom_column", 'incrementos_posts_custom_column', 10, 2 );
+
+// ----------
+// Hacer las columnas personalizadas ordenables en la lista de posts de "incrementos"
+// ----------
+function incrementos_sortable_columns($columns) {
+  $columns['obras_sociales'] = 'obras_sociales';
+  $columns['fecha_vigencia'] = 'fecha_vigencia';
+  
+  return $columns;
+}
+
+add_filter('manage_edit-incrementos_sortable_columns', 'incrementos_sortable_columns');
+
+// ----------
+// Agrega clase con slug de pagina a body-class
+// ----------
+function add_slug_body_class( $classes ) {
+  global $post;
+  
+  if ( isset( $post ) ) {
+    $classes[] = $post->post_type . '-' . $post->post_name;
+  }
+  
+  return $classes;
+}
+
+add_filter( 'body_class', 'add_slug_body_class' );
+
+// WooCommerce
+require get_template_directory() . '/woocommerce/woocommerce-functions.php';
+// WooCommerce END
