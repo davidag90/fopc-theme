@@ -1168,27 +1168,27 @@ function remove_woocommerce_page_title($show_title) {
 /**
  * Agregar un método de pago personalizado en WooCommerce.
  */
-function agregar_pago_debito_matricula( $gateways ) {
-  $gateways['pago_debito_matricula'] = 'DebitoMatriculaProf';
+function agregar_pago_deb_liq_prof( $gateways ) {
+  $gateways['pago_deb_liq_prof'] = 'DebitoLiqProf';
   return $gateways;
 }
-add_filter( 'woocommerce_payment_gateways', 'agregar_pago_debito_matricula' );
+add_filter( 'woocommerce_payment_gateways', 'agregar_pago_deb_liq_prof' );
 
 /**
 * Clase para el método de pago personalizado.
 */
-class DebitoMatriculaProf extends WC_Payment_Gateway {
+class DebitoLiqProf extends WC_Payment_Gateway {
   
   /**
    * Constructor de la clase.
    */
   public function __construct() {
-      $this->id                 = 'pago_debito_matricula';
+      $this->id                 = 'pago_deb_liq_prof';
       $this->icon               = '';
-      $this->method_title       = 'Débito de Matrícula Profesional';
-      $this->title              = 'Debitar de Matrícula';
-      $this->description        = 'El monto del pedido se debitará de la matricula profesional';
-      $this->method_description = 'Debita los pedidos de Imprenta de la matrícula profesional indicada';
+      $this->method_title       = 'Débito de Liquidación Profesional';
+      $this->title              = 'Débito de Liquidación';
+      $this->description        = 'El monto del pedido se debitará de la liquidación profesional';
+      $this->method_description = 'Debita los pedidos de Imprenta de la liquidación profesional';
       $this->supports           = array( 'products' );
       
       
@@ -1206,7 +1206,7 @@ class DebitoMatriculaProf extends WC_Payment_Gateway {
           'enabled' => array(
               'title'   => 'Habilitar/Deshabilitar',
               'type'    => 'checkbox',
-              'label'   => 'Habilitar Débito de Matrícula Profesional',
+              'label'   => 'Habilitar Débito de Liquidación Profesional',
               'default' => 'yes',
           ),
       );
@@ -1224,6 +1224,10 @@ class DebitoMatriculaProf extends WC_Payment_Gateway {
       
       // Vaciar el carrito
       WC()->cart->empty_cart();
+
+      // Marcamos el pedido como "completado" porque el método
+      // no requiere verificaciones adicionales
+      $order->update_status('completed');
       
       // Redirigir al usuario a la página de agradecimiento
       return array(
@@ -1315,6 +1319,7 @@ function custom_product_cat_class($output, $args) {
   }
   return $output;
 }
+
 add_filter('wp_list_categories', 'custom_product_cat_class', 10, 2);
 
 // WooCommerce END

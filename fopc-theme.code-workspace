@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../bootscore"
+		}
+	],
+	"settings": {
+		"workbench.colorTheme": "Visual Studio Dark"
+	}
+}
