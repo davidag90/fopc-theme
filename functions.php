@@ -1099,12 +1099,16 @@ add_shortcode('searchbox-novedades','init_searchbox_novedades');
 // ------------
 // Shortcode para noticias en front-page
 // ------------
-function init_noticias_front() {
+function init_noticias_front($atts) {
   ob_start();
+
+  $sh_atts = shortcode_atts( array(
+    "cantidad" => 3
+    ), $atts, "noticias-front");
   
   $args = array(
     'category_name' => 'noticias',
-    'posts_per_page' => 3,
+    'posts_per_page' => $sh_atts['cantidad'],
     'order' => 'DESC'
   );
   
@@ -1112,14 +1116,14 @@ function init_noticias_front() {
   
   if ($query->have_posts()) {
     echo '<div class="noticias-front">';
-    echo '<div class="row g-5">';
+    echo '<div class="row row-cols-1 row-cols-md-' . $sh_atts['cantidad'] . ' g-5">';
 
     $post_count = 0;
     
     while ($query->have_posts()) {
       $query->the_post();
       
-      echo '<div class="col-md-4">';
+      echo '<div>';
       if ($post_count == 0):
         echo '<div class="noticia-front d-flex flex-column justify-content-start h-100">';
       else:
