@@ -1133,7 +1133,6 @@ function init_noticias_front($atts) {
       echo '<div class="noticia-front-thumbnail mb-3" style="background-image:url(' . esc_url( get_the_post_thumbnail_url() ) . '); background-repeat:no-repeat; background-size:cover"></div>';
       echo '<p class="text-muted mb-0"><small>' . get_the_date() . '</small></p>';
       echo '<h3 class="h5 noticia-title"><a class="text-decoration-none" href="' . get_the_permalink() . '">' . get_the_title() . '</a></h3>';
-      echo '<div class="mb-4">' . get_the_excerpt() . '</div>';
       echo '<p class="text-end mt-auto"><a class="link-offset-2" href="' . get_the_permalink() . '" target="_blank" role="button"><i class="fa-regular fa-newspaper me-2"></i>Seguir leyendo</a></p>';
       echo '</div>'; // </noticia-front>
       echo '</div>'; // </col-md-4>
