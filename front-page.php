@@ -10,7 +10,7 @@ get_header();
   <div id="hero-wrapper" class="width-100">
     <div id="hero-carousel" class="owl-carousel">
       <div class="item">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfoI9BJT6DL1h97TVDsIQWBMheN9m3FAzAgXu5L3wxPFWEc6A/viewform">
+        <a href="https://fopc.org.ar/noticias/sorteo-dia-de-la-odontologia-latinoamericana/">
           <picture>
             <source srcset="<?php echo get_stylesheet_directory_uri(); ?>/img/front-page/sorteo-sm.jpg" media="(max-width: 576px)" />
             <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/front-page/sorteo-lg.jpg" alt="Sorteo Día de la Odontología Latinoamericana - Sorteo 3 de Octubre">
