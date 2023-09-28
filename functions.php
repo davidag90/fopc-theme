@@ -1287,8 +1287,6 @@ class DebitoLiqProf extends WC_Payment_Gateway {
     }
     die;
  }
-  
- /* Proceso de validación del archivo server-side; pendiente de analizar en el futuro
  
  add_action( 'woocommerce_checkout_update_order_meta', 'custom_save_new_checkout_field' );
     
@@ -1296,12 +1294,13 @@ class DebitoLiqProf extends WC_Payment_Gateway {
     if ( ! empty( $_POST['img_personalizada_field'] ) ) {
        update_post_meta( $order_id, '_img_personalizada', $_POST['img_personalizada_field'] );
     }
- } */
+ }
     
  add_action( 'woocommerce_admin_order_data_after_billing_address', 'custom_show_new_checkout_field_order', 10, 1 );
      
  function custom_show_new_checkout_field_order( $order ) {    
   $order_id = $order->get_id();
+  
   $img_personalizada_url = get_post_meta( $order_id, '_img_personalizada', true );
 
   if ( $img_personalizada_url ) {
