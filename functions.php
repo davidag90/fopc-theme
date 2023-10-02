@@ -1292,7 +1292,7 @@ class DebitoLiqProf extends WC_Payment_Gateway {
     
  function custom_save_new_checkout_field( $order_id ) { 
     if ( ! empty( $_POST['img_personalizada_field'] ) ) {
-       update_post_meta( $order_id, '_img_personalizada', $_POST['img_personalizada_field'] );
+        update_post_meta( $order_id, '_img_personalizada', $_POST['img_personalizada_field'] );
     }
  }
     
