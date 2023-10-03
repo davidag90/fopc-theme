@@ -1310,8 +1310,8 @@ class DebitoLiqProf extends WC_Payment_Gateway {
    
  add_action( 'woocommerce_email_after_order_table', 'custom_show_new_checkout_field_emails', 20, 4 );
     
- function custom_show_new_checkout_field_emails( $order, $sent_to_admin, $plain_text, $email ) {
-     if ( $sent_to_admin && get_post_meta( $order->get_id(), '_img_personalizada', true ) ) echo '<p><strong>Application Form:</strong> ' . get_post_meta( $order->get_id(), '_img_personalizada', true ) . '</p>';
+ function custom_show_new_checkout_field_emails( $order, $sent_to_admin ) {
+     if ( $sent_to_admin && get_post_meta( $order->get_id(), '_img_personalizada', true ) ) echo '<p><strong>Imagen Personalizada:</strong> ' . get_post_meta( $order->get_id(), '_img_personalizada', true ) . '</p>';
  }
 
  // Filtro para añadir una clase a los elementos <a> del widget "Categorías de producto"

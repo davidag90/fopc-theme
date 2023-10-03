@@ -106,8 +106,19 @@
   }
 }
 
-#accesos-rapidos img {
-  max-width: 110px;
+#accesos-rapidos > div {
+  margin: 0 1rem;
+  padding: 0;
+}
+
+#accesos-rapidos > div {
+  min-width: 110px;
+  max-width: 120px;
+}
+
+#accesos-rapidos > div > figure,
+#accesos-rapidos > div > figure > img {
+  max-width: 100%;
 }
 
 #accesos-rapidos a {
