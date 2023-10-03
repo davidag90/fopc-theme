@@ -106,23 +106,16 @@
   }
 }
 
-#accesos-rapidos > div {
+#accesos-rapidos > a {
   margin: 0 1rem;
   padding: 0;
-}
-
-#accesos-rapidos > div {
   min-width: 110px;
   max-width: 120px;
 }
 
-#accesos-rapidos > div > figure,
-#accesos-rapidos > div > figure > img {
+#accesos-rapidos > a > div > figure,
+#accesos-rapidos > a > div > figure > img {
   max-width: 100%;
-}
-
-#accesos-rapidos a {
-  line-height: 1.25rem;
 }
 
 .footer_widget > .wsf-form .invalid-feedback {

@@ -31,6 +31,11 @@ function bootscore_child_enqueue_styles() {
   // custom.js
   wp_enqueue_script('custom-js', get_stylesheet_directory_uri() . '/js/custom.js', array('jquery'), '', true);
 
+  // Manipulación de Accesos Rápidos en Front-Page
+  if(is_front_page()):
+    wp_enqueue_script('front-page-js', get_stylesheet_directory_uri() . '/js/front-page.js', array(), '', true);
+  endif;
+
   // Filtro Beneficios
   if(is_page('beneficios')):
     wp_enqueue_script('beneficios', get_stylesheet_directory_uri() . '/js/beneficios.js', array('jquery'), '', true);
