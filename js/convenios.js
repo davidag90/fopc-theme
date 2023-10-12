@@ -1,96 +1,115 @@
-jQuery(function($) {
-  $(document).ready(function () {
-    // Capturar el evento 'input' del input de texto
-    $("#terminos-filtro").on("input", function () {
-      var textoFiltro = $(this).val().toLowerCase(); // Obtener el valor del input y convertirlo a minúsculas
+const convenios = document.querySelectorAll('#resumen-convenios .convenio');
+const searchBox = document.getElementById('terminos-filtro');
+const buttonActivos = document.getElementById('filtra-activos');
+const buttonInactivos = document.getElementById('filtra-inactivos');
+const buttonTodos = document.getElementById('filtra-todos');
+const buttonFacOnline = document.getElementById('filtra-faconline');
+
+searchBox.addEventListener('input', buscarConvenio);
+buttonActivos.addEventListener('click', mostrarActivos);
+buttonInactivos.addEventListener('click', mostrarInactivos);
+buttonTodos.addEventListener('click', mostrarTodos);
+buttonFacOnline.addEventListener('click', mostrarFacOnline);
+
+function buscarConvenio() {  
+  let searchValue = searchBox.value.toLowerCase();
+
+  buttonActivos.classList.add('opacity-50');
+  buttonInactivos.classList.add('opacity-50');
+  buttonTodos.classList.add('opacity-50');
+  buttonFacOnline.classList.add('opacity-50');
   
-      // Filtrar los elementos div en base al texto introducido
-      $("#resumen-convenios .col").each(function () {
-        var textoElemento = $(this).text().toLowerCase(); // Obtener el texto del elemento y convertirlo a minúsculas
+  console.log(searchValue);
+
+  for (const convenio of convenios) {
+    let convenioText = convenio.textContent.toLowerCase();
+
+    if(convenioText.indexOf(searchValue) != -1) {
+      convenio.classList.add('d-block');
+      convenio.classList.remove('d-none');
+    }
+    else {
+      convenio.classList.add('d-none');
+      convenio.classList.remove('d-block');
+    }
+  }
+}
+
+function mostrarActivos() {
+  searchBox.value = "";
   
-        // Mostrar u ocultar el elemento según el filtro
-        if (textoElemento.indexOf(textoFiltro) !== -1) {
-          $(this).fadeIn();
-        } else {
-          $(this).fadeOut();
-        }
-      });
-    });
+  buttonTodos.classList.add('opacity-50');
+  buttonInactivos.classList.add('opacity-50');
+  buttonFacOnline.classList.add('opacity-50');
 
-    $('#filtra-todos').on('click', function() {
-      $(this).removeClass('opacity-50');
-      
-      if (! $('#filtra-inactivos').hasClass('opacity-50')) {
-        $('#filtra-inactivos').addClass('opacity-50');
-      }
-      
-      if (! $('#filtra-activos').hasClass('opacity-50')) {
-        $('#filtra-activos').addClass('opacity-50');
-      }
+  this.classList.remove('opacity-50');
 
-      $('.convenio').each(function(){
-        var estado_display = $(this).css('display');
+  
+  for (const convenio of convenios) {
+    if (convenio.classList.contains("activo")) {
+      convenio.classList.remove('d-none');
+      convenio.classList.add('d-block');
+    }
+    else {
+      convenio.classList.add('d-none');
+      convenio.classList.remove('d-block');
+    }
+  }
+}
 
-        if(estado_display == 'none') {
-          $(this).fadeIn();
-        }
-      });
-    });
+function mostrarInactivos() {
+  searchBox.value = "";
 
-    $('#filtra-activos').on('click', function() {
-      $(this).removeClass('opacity-50');
-      
-      if (! $('#filtra-inactivos').hasClass('opacity-50')) {
-        $('#filtra-inactivos').addClass('opacity-50');
-      }
+  buttonTodos.classList.add('opacity-50');
+  buttonActivos.classList.add('opacity-50');
+  buttonFacOnline.classList.add('opacity-50');
 
-      if (! $('#filtra-todos').hasClass('opacity-50')) {
-        $('#filtra-todos').addClass('opacity-50');
-      }
+  this.classList.remove('opacity-50');
+  
+  for (const convenio of convenios) {
+    if (convenio.classList.contains("inactivo")) {
+      convenio.classList.remove('d-none');
+      convenio.classList.add('d-block');
+    }
+    else {
+      convenio.classList.add('d-none');
+      convenio.classList.remove('d-block');
+    }
+  }
+}
 
-      $('.activo').each(function(){
-        var estado_display = $(this).css('display');
+function mostrarTodos() {
+  searchBox.value = "";
+  
+  buttonActivos.classList.add('opacity-50');
+  buttonInactivos.classList.add('opacity-50');
+  buttonFacOnline.classList.add('opacity-50');
+  
+  this.classList.remove('opacity-50');
+  
+  for (const convenio of convenios) {
+    convenio.classList.remove('d-none');
+    convenio.classList.add('d-block');
+  }
+}
 
-        if(estado_display == 'none') {
-          $(this).fadeIn();
-        }
-      });
-
-      $('.inactivo').each(function(){
-        var estado_display = $(this).css('display');
-
-        if(estado_display != 'none') {
-          $(this).fadeOut();
-        }
-      });
-    });
-    
-    $('#filtra-inactivos').on('click', function() {
-      $(this).removeClass('opacity-50');
-      
-      if (! $('#filtra-activos').hasClass('opacity-50')) {
-        $('#filtra-activos').addClass('opacity-50');
-      }
-
-      if (! $('#filtra-todos').hasClass('opacity-50')) {
-        $('#filtra-todos').addClass('opacity-50');
-      }
-
-      $('.inactivo').each(function(){
-        var estado_display = $(this).css('display');
-
-        if(estado_display == 'none') {
-          $(this).fadeIn();
-        }
-      });
-
-      $('.activo').each(function(){
-        var estado_display = $(this).css('display');
-
-        if(estado_display != 'none') {
-          $(this).fadeOut();
-        }
-      });
-    });
-  });
-});
+function mostrarFacOnline() {
+  searchBox.value = "";
+  
+  buttonTodos.classList.add('opacity-50');
+  buttonActivos.classList.add('opacity-50');
+  buttonInactivos.classList.add('opacity-50');
+  
+  this.classList.remove('opacity-50');
+  
+  for (const convenio of convenios) {
+    if (convenio.classList.contains("fac-online") && convenio.classList.contains("activo") ) {
+      convenio.classList.remove('d-none');
+      convenio.classList.add('d-block');
+    }
+    else {
+      convenio.classList.add('d-none');
+      convenio.classList.remove('d-block');
+    }
+  }
+}
