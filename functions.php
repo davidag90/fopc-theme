@@ -782,7 +782,8 @@ function init_searchbox_convenios() {
   echo '<div class="col-auto">';
   echo '<button class="btn btn-primary me-2" id="filtra-todos">Todos</button>';
   echo '<button class="btn btn-success me-2 opacity-50" id="filtra-activos">Activos</button>';
-  echo '<button class="btn btn-danger opacity-50" id="filtra-inactivos">Inactivos</button>';
+  echo '<button class="btn btn-danger me-2 opacity-50" id="filtra-inactivos">Inactivos</button>';
+  echo '<button class="btn btn-secondary opacity-50" id="filtra-faconline">Factura Online</button>';
   echo '</div>'; // .col-auto
   echo '</div>'; // #searchbox-convenios.row
 
@@ -840,11 +841,14 @@ function loop_convenios_vigentes() {
       $numero = get_post_field('numero');
       $situacion = get_post_field('situacion');
       $detalle = get_post_field('detalle_situacion');
+      $factura_online = get_post_field('facturacion_online');
 
-      if( $situacion == "activo" ):
-      echo '<div class="col convenio activo">';
+      if( $situacion == "activo" && $factura_online == "activa" ):
+        echo '<div class="col convenio activo fac-online">';
+      elseif( $situacion == "activo" ):
+        echo '<div class="col convenio activo">';
       else:
-      echo '<div class="col convenio inactivo">';
+        echo '<div class="col convenio inactivo">';
       endif;
       
       echo '<div class="card mb-4 overflow-hidden">';
@@ -861,6 +865,9 @@ function loop_convenios_vigentes() {
       else:
         echo '<p class="card-text text-danger text-uppercase mb-0"><strong>INACTIVO</strong></p>';
         echo '<p class="card-text"><small>' . $detalle . '</small></p>';
+      endif;
+      if( $factura_online == "activa" ):
+        echo '<p class="card-text bg-success-subtle p-2 border border-success rounded"><i class="fas fa-check mr-1"></i> Facturación online habilitada</p>';
       endif;
       echo '</div>'; // .card-body
       echo '</div>'; // .col-sm-8
