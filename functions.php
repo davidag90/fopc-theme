@@ -1257,7 +1257,7 @@ class DebitoLiqProf extends WC_Payment_Gateway {
  
  function custom_checkout_file_upload() {
     echo '<h3>Personalización</h3>';
-    echo '<p>En caso de encargar artículos pertenecientes a la categoría de "Imprenta personalizada", adjunte aquí una imagen de su logo para ser utilizada en los mismos</p>';
+    echo '<p>En esa sección podrá cargar el archivo de su propio diseño, o algún logotipo que quiera agregar en el mismo.</p>';
     echo '<p class="form-row form-row-wide"><label for="img_personalizada">Seleccionar archivo</label><span class="woocommerce-input-wrapper"><input type="file" id="img_personalizada" name="img_personalizada" accept=".jpg,.jpeg,.png"><input type="hidden" name="img_personalizada_field"></span></p>';
     
     wc_enqueue_js(
