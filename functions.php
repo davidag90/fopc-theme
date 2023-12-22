@@ -52,6 +52,11 @@ function bootscore_child_enqueue_styles() {
   if(is_page( 'ultimo-mes-abonado' ) ):
     wp_enqueue_script('ultimo-mes', get_stylesheet_directory_uri() . '/js/ultimo-mes.js', array('jquery'), '', true);
   endif;
+
+  // Aviso de Licencia en Pedidos de Imprenta
+  if( is_page( 'pedidos-imprenta' ) ):
+    wp_enqueue_script('aviso-licencia', get_stylesheet_directory_uri() . '/js/aviso-licencia.js', array(), '', true);
+  endif;
 }
 
 
@@ -1257,7 +1262,7 @@ class DebitoLiqProf extends WC_Payment_Gateway {
  
  function custom_checkout_file_upload() {
     echo '<h3>Personalización</h3>';
-    echo '<p>En esa sección podrá cargar el archivo de su propio diseño, o algún logotipo que quiera agregar en el mismo.</p>';
+    echo '<p>Adjunte aquí un archivo/foto de su diseño o logotipo propio</p>';
     echo '<p class="form-row form-row-wide"><label for="img_personalizada">Seleccionar archivo</label><span class="woocommerce-input-wrapper"><input type="file" id="img_personalizada" name="img_personalizada" accept=".jpg,.jpeg,.png"><input type="hidden" name="img_personalizada_field"></span></p>';
     
     wc_enqueue_js(
