@@ -52,11 +52,6 @@ function bootscore_child_enqueue_styles() {
   if(is_page( 'ultimo-mes-abonado' ) ):
     wp_enqueue_script('ultimo-mes', get_stylesheet_directory_uri() . '/js/ultimo-mes.js', array('jquery'), '', true);
   endif;
-
-  // Aviso de Licencia en Pedidos de Imprenta
-  if( is_shop() ):
-    wp_enqueue_script('aviso-licencia', get_stylesheet_directory_uri() . '/js/aviso-licencia.js', array(), '', true);
-  endif;
 }
 
 
