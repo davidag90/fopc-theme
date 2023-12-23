@@ -15,11 +15,14 @@
 ?>
 
 <?php
-  $time_hoy = strtotime(date('Y-m-d'));
-  $time_inicio = strtotime(date('2024-01-02'));
-  $time_fin = strtotime(date('2024-01-31'));
+  // Establece fechas para trabajar (actual, limite inicial, limite final)
+  // Usa strtotime() para transformar la fecha en un valor absoluto en seg formato Unix
+  $hoy = strtotime(date('Y-m-d'));
+  $inicio = strtotime(date('2024-01-02'));
+  $fin = strtotime(date('2024-02-01'));
 
-  $time_check = $time_hoy >= $time_inicio && $time_hoy <= $time_fin;
+  // Guarda el resultado de chequear si la fecha es igual o posterior al inicio, e igual o inferior al final
+  $time_check = $hoy >= $inicio && $hoy < $fin;
 
   if( ( is_shop() || is_checkout_pay_page() ) && $time_check): 
   ?>
