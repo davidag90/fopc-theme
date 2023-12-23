@@ -54,7 +54,7 @@ function bootscore_child_enqueue_styles() {
   endif;
 
   // Aviso de Licencia en Pedidos de Imprenta
-  if( is_page( 'pedidos-imprenta' ) ):
+  if( is_shop() ):
     wp_enqueue_script('aviso-licencia', get_stylesheet_directory_uri() . '/js/aviso-licencia.js', array(), '', true);
   endif;
 }

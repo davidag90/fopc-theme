@@ -14,6 +14,43 @@
 
 ?>
 
+<?php
+  $time_hoy = strtotime(date('Y-m-d'));
+  $time_inicio = strtotime(date('2024-01-02'));
+  $time_fin = strtotime(date('2024-01-31'));
+
+  $time_check = $time_hoy >= $time_inicio && $time_hoy <= $time_fin;
+
+  if( ( is_shop() || is_checkout_pay_page() ) && $time_check): 
+  ?>
+
+  <div class="modal" id="aviso-licencia" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Aviso importante</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Estimado Profesional:</strong></p>
+          <p>Informamos que la imprenta se encuentra de <span class="fw-bold text-uppercase">licencia por vacaciones</span>.</p>
+          <p>Los pedidos podrán ser entregados dentro de los primeros 15 días de Febrero.</p>
+          <p class="text-end">Muchas gracias,<br>
+          <em>Departamento de Información, Educación y Publicación</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const modalLicencia = new bootstrap.Modal('#aviso-licencia');
+      
+      modalLicencia.show();
+    });
+  </script>
+  <?php endif; ?>
+
 <footer>
   <div class="bootscore-footer bg-primary bg-opacity-25 pt-4 pb-2">
     <div class="container">
