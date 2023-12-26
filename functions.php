@@ -781,9 +781,9 @@ function init_searchbox_convenios() {
   echo '</div>'; // .col-auto
   echo '<div class="col-auto">';
   echo '<button class="btn btn-primary me-2" id="filtra-todos">Todos</button>';
-  echo '<button class="btn btn-success me-2 opacity-50" id="filtra-activos">Activos</button>';
-  echo '<button class="btn btn-danger me-2 opacity-50" id="filtra-inactivos">Inactivos</button>';
-  echo '<button class="btn btn-secondary opacity-50" id="filtra-faconline">Factura Online</button>';
+  echo '<button class="btn btn-success opacity-50 me-2" id="filtra-activos">Activos</button>';
+  echo '<button class="btn btn-danger opacity-50 me-2" id="filtra-inactivos">Inactivos</button>';
+  echo '<button class="btn btn-info opacity-50" id="filtra-faconline">Factura Online</button>';
   echo '</div>'; // .col-auto
   echo '</div>'; // #searchbox-convenios.row
 
@@ -867,7 +867,7 @@ function loop_convenios_vigentes() {
         echo '<p class="card-text"><small>' . $detalle . '</small></p>';
       endif;
       if( $factura_online == "activa" ):
-        echo '<p class="card-text bg-success-subtle p-2 border border-success rounded"><i class="fas fa-check mr-1"></i> Facturación online habilitada</p>';
+        echo '<p class="card-text bg-info-subtle p-2 border border-info rounded text-dark"><i class="fas fa-check mr-1"></i> Facturación online habilitada</p>';
       endif;
       echo '</div>'; // .card-body
       echo '</div>'; // .col-sm-8

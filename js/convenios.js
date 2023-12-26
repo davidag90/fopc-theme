@@ -35,15 +35,28 @@ function buscarConvenio() {
   }
 }
 
+function mostrarTodos() {
+  searchBox.value = "";
+  
+  this.classList.remove('opacity-50');
+  buttonActivos.classList.add('opacity-50');
+  buttonInactivos.classList.add('opacity-50');
+  buttonFacOnline.classList.add('opacity-50');
+  
+  
+  for (const convenio of convenios) {
+    convenio.classList.remove('d-none');
+    convenio.classList.add('d-block');
+  }
+}
+
 function mostrarActivos() {
   searchBox.value = "";
   
   buttonTodos.classList.add('opacity-50');
+  this.classList.remove('opacity-50');
   buttonInactivos.classList.add('opacity-50');
   buttonFacOnline.classList.add('opacity-50');
-
-  this.classList.remove('opacity-50');
-
   
   for (const convenio of convenios) {
     if (convenio.classList.contains("activo")) {
@@ -62,9 +75,9 @@ function mostrarInactivos() {
 
   buttonTodos.classList.add('opacity-50');
   buttonActivos.classList.add('opacity-50');
-  buttonFacOnline.classList.add('opacity-50');
-
   this.classList.remove('opacity-50');
+  buttonFacOnline.classList.add('opacity-50');
+  
   
   for (const convenio of convenios) {
     if (convenio.classList.contains("inactivo")) {
@@ -78,28 +91,12 @@ function mostrarInactivos() {
   }
 }
 
-function mostrarTodos() {
-  searchBox.value = "";
-  
-  buttonActivos.classList.add('opacity-50');
-  buttonInactivos.classList.add('opacity-50');
-  buttonFacOnline.classList.add('opacity-50');
-  
-  this.classList.remove('opacity-50');
-  
-  for (const convenio of convenios) {
-    convenio.classList.remove('d-none');
-    convenio.classList.add('d-block');
-  }
-}
-
 function mostrarFacOnline() {
   searchBox.value = "";
   
   buttonTodos.classList.add('opacity-50');
   buttonActivos.classList.add('opacity-50');
   buttonInactivos.classList.add('opacity-50');
-  
   this.classList.remove('opacity-50');
   
   for (const convenio of convenios) {
