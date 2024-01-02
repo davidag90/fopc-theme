@@ -37,7 +37,7 @@
         <div class="modal-body">
           <p><strong>Estimado Profesional:</strong></p>
           <p>Informamos que la imprenta se encuentra de <span class="fw-bold text-uppercase">licencia por vacaciones</span>.</p>
-          <p>Los pedidos podrán ser entregados dentro de los primeros 15 días de Febrero.</p>
+          <p>Los pedidos podrán ser entregados dentro de los primeros 15 días de Febrero de 2024.</p>
           <p class="text-end">Muchas gracias,<br>
           <em>Departamento de Información, Educación y Publicación</em></p>
         </div>
