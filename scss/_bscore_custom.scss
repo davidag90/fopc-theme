@@ -84,8 +84,26 @@
   right: 0;
 }
 
+.pres-fact {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 1rem;
+}
+
 .pres-fact .wp-block-image {
   margin: 0 !important;
+  width: 100%;
+}
+
+.pres-fact .wp-block-image > img {
+  width: 100% !important;
+  max-width: 110px;
+}
+
+.pres-fact > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .pres-fact p {
@@ -94,10 +112,6 @@
 
 .pres-fact p:last-child {
   margin-bottom: 0;
-}
-
-.pres-fact img {
-  max-width: 8rem;
 }
 
 @include media-breakpoint-up(sm) {
