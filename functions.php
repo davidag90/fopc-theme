@@ -890,6 +890,65 @@ function loop_convenios_vigentes() {
 
 add_shortcode('convenios-vigentes', 'loop_convenios_vigentes');
 
+// ------------
+// Shortcode para listado de convenios vigentes
+// ------------
+function loop_listado_convenios() {
+  ob_start();
+
+  $args = array(
+    'post_type' => 'convenio',
+    'nopaging'  => true,
+    'order'     => 'ASC',
+    'orderby'   => 'title'
+  );
+  
+  $query = new WP_Query($args);
+  
+  if ($query->have_posts()) {
+    echo '<table class="table">';
+      echo '<thead>';
+        echo '<tr>';
+          echo '<th>Obra Social</th>';
+          echo '<th>Código</th>';
+          echo '<th>Estado</th>';
+          echo '<th>Fact Online</th>';
+        echo '</tr>';
+      echo '</thead>';
+      echo '<tbody>';
+      
+        while($query->have_posts()):
+          $query->the_post();
+          $sigla = get_the_title();
+          $logotipo = get_the_post_thumbnail_url();
+          $desc = get_post_field('descripcion');
+          $numero = get_post_field('numero');
+          $situacion = get_post_field('situacion');
+          $factura_online = get_post_field('facturacion_online');
+        
+          echo '<tr>';
+            echo '<td>' . $sigla . '<br><small>' . $desc . '</small></td>';
+            echo '<td>' . $numero . '</td>';
+            echo '<td>' . $situacion . '</td>';
+            echo '<td>' . ($factura_online == 'activa' ? 'SI' : 'NO') . '</td>';
+          echo '</tr>';
+        endwhile;
+
+      echo '</tbody>';
+    echo '</table>'; // .table
+    
+    wp_reset_postdata(); // Restablece los datos del post original
+  } else {
+    echo '<p>No se encontró contenido de esta sección.</p>';
+  }
+
+  $output = ob_get_clean();
+
+  return $output;
+}
+
+add_shortcode('listado-convenios', 'loop_listado_convenios');
+
 //================//
 // Shortcode de carousel logos obras sociales
 //================//
@@ -1027,6 +1086,7 @@ function init_searchbox_incrementos() {
   echo '<label class="visually-hidden" for="anio">Año:</label>';
   echo '<select class="form-select" aria-label="Año" name="anio" id="anio">';
   echo '<option selected>Seleccionar año...</option>';
+  echo '<option value="2024">2024</option>';
   echo '<option value="2023">2023</option>';
   echo '<option value="2022">2022</option>';
   echo '<option value="2021">2021</option>';
