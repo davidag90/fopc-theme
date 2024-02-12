@@ -13,48 +13,7 @@
  */
 
 ?>
-
-<?php
-  // Establece fechas para trabajar (actual, limite inicial, limite final)
-  // Usa strtotime() para transformar la fecha en un valor absoluto en seg formato Unix
-  $hoy = strtotime(date('Y-m-d'));
-  $inicio = strtotime(date('2024-01-02'));
-  $fin = strtotime(date('2024-02-01'));
-
-  // Guarda el resultado de chequear si la fecha es igual o posterior al inicio, e igual o inferior al final
-  $time_check = $hoy >= $inicio && $hoy < $fin;
-
-  if( ( is_shop() || is_checkout_pay_page() ) && $time_check): 
-  ?>
-
-  <div class="modal" id="aviso-licencia" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Aviso importante</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p><strong>Estimado Profesional:</strong></p>
-          <p>Informamos que la imprenta se encuentra de <span class="fw-bold text-uppercase">licencia por vacaciones</span>.</p>
-          <p>Los pedidos podrán ser entregados dentro de los primeros 15 días de Febrero de 2024.</p>
-          <p class="text-end">Muchas gracias,<br>
-          <em>Departamento de Información, Educación y Publicación</em></p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const modalLicencia = new bootstrap.Modal('#aviso-licencia');
-      
-      modalLicencia.show();
-    });
-  </script>
-  <?php endif; ?>
-
-<footer>
+<footer class="d-print-none">
   <div class="bootscore-footer bg-primary bg-opacity-25 pt-4 pb-2">
     <div class="container">
       <!-- Top Footer Widget -->
@@ -139,13 +98,12 @@
 </footer>
 
 <!-- To top button -->
-<a href="#" class="btn btn-dark shadow top-button position-fixed zi-1020"><i class="fa-solid fa-chevron-up"></i><span class="visually-hidden-focusable">To top</span></a>
-<a href="https://wa.me/5493512159990/" class="whatsapp-button shadow position-fixed zi-1020" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/whatsapp.png"></a>
+<a href="#" class="btn btn-dark shadow top-button position-fixed zi-1020 d-print-none"><i class="fa-solid fa-chevron-up"></i><span class="visually-hidden-focusable">To top</span></a>
+<a href="https://wa.me/5493512159990/" class="whatsapp-button shadow position-fixed zi-1020 d-print-none" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/whatsapp.png"></a>
 
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
 
 </body>
-
 </html>
