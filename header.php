@@ -36,7 +36,7 @@
     <?php wp_body_open(); ?>
 
     <div id="page" class="site">
-        <header id="masthead" class="site-header">
+        <header id="masthead" class="site-header d-print-none">
             <div class="fixed-top bg-light border-bottom border-secondary border-opacity-25">
                 <nav id="nav-main" class="navbar navbar-expand-lg">
                     <div class="container-fluid">
