@@ -1,10 +1,7 @@
-# bootScore Child Theme
+# FOPC-Theme
 
-Start developing your new WordPress project right away in a upgrade-safe way using overrides by copying files from [bootScore](https://github.com/crftwrk/bootscore) parent theme.
+Theme de WordPress personalizado para Federación Odontológica de la Prov. de Córdoba
 
-## Installation
+## Bootscore
 
-1. Download latest [bootscore-child-main.zip](https://github.com/bootscore/bootscore-child/releases) release.
-2. In your admin panel, go to Appearance > Themes and click the Add New button.
-3. Click Upload Theme and Choose File, then select the theme's .zip file. Click Install Now.
-4. Click Activate to use your new theme right away.
+Basado en Bootscore (https://bootscore.me/), un boilerplate mix de Understrap y Twitter Bootstrap 5
