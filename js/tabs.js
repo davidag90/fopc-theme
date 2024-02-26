@@ -1,10 +1,8 @@
-// Get the current URL
 const currentURL = window.location.href;
 const tabList = [].slice.call(document.querySelectorAll('#fopc-tabs a'));
 
 document.addEventListener('DOMContentLoaded', createTabs(tabList));
 
-// Check if the URL contains a hashtag
 if(currentURL.includes("#")) {
     const urlHash = window.location.hash;
 
@@ -27,7 +25,7 @@ function fireInitTab(urlHash, tabList) {
 
 function createTabs(tabList) {
     tabList.forEach(triggerEl => {
-        let tabTrigger = new bootstrap.Tab(triggerEl);
+        const tabTrigger = new bootstrap.Tab(triggerEl);
     
         triggerEl.addEventListener('click', function (event) {
             event.preventDefault();

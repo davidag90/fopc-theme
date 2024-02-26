@@ -46,7 +46,7 @@ function bootscore_child_enqueue_styles() {
   endif;
 
   if(is_page( array('prestamos','subsidios','alta-baja-fopc','auditoria-apross') ) ):
-    wp_enqueue_script('fopc-tabs', get_stylesheet_directory_uri() . '/js/tabs.js', array('jquery'), '', true);
+    wp_enqueue_script('fopc-tabs', get_stylesheet_directory_uri() . '/js/tabs.js', array('bootstrap'), '', true);
   endif;
   
   if(is_page( 'ultimo-mes-abonado' ) ):
