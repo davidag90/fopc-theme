@@ -11,16 +11,14 @@ if(currentURL.includes("#")) {
 
 function fireInitTab(urlHash, tabList) {
     tabList.forEach(triggerEl => {
-        triggerEl.classList.remove('active');
-        triggerEl.classList.remove('show');
+        let triggerLink = triggerEl.getAttribute('href');
+        
+        const tabTrigger = new bootstrap.Tab(triggerEl);
+    
+        if(triggerLink === urlHash) {
+            tabTrigger.show();
+        }
     });
-
-    let triggerLink = triggerEl.getAttribute('href');
-
-    if(triggerLink === urlHash) {
-        triggerEl.classList.add('active');
-        triggerEl.classList.add('show');
-    }
 }
 
 function createTabs(tabList) {
@@ -31,7 +29,5 @@ function createTabs(tabList) {
             event.preventDefault();
             tabTrigger.show();
         });
-        
-        triggerEl.classList.add('fade');
     });
 }
