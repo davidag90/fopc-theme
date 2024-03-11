@@ -27,13 +27,13 @@
         <div class="d-none d-lg-block col-lg-4">
           <div class="h-100 d-flex flex-column justify-content-end">
             <div class="social-media mb-2">
-              <a class="d-inline-block me-1" href="#" alt="FOPC en Instagram" target="_blank">
+              <a class="d-inline-block me-1" href="https://www.instagram.com/fopc.cba/" alt="FOPC en Instagram" target="_blank">
                 <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/icons/social-media/instagram.png">
               </a>
-              <a class="d-inline-block me-1" href="#" alt="FOPC en Facebook" target="_blank">
+              <a class="d-inline-block me-1" href="https://www.facebook.com/FederacionOdontologicaDeCordoba" alt="FOPC en Facebook" target="_blank">
                 <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/icons/social-media/facebook.png">
               </a>
-              <a class="d-inline-block" href="#" alt="FOPC en YouTube" target="_blank">
+              <a class="d-inline-block" href="https://www.youtube.com/channel/UCMDkW7CMjgSzlHZawhIBCXA" alt="FOPC en YouTube" target="_blank">
                 <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/icons/social-media/youtube.png">
               </a>
             </div>
