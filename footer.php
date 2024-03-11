@@ -30,11 +30,14 @@
               <a class="d-inline-block me-1" href="#" alt="FOPC en Instagram" target="_blank">
                 <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/icons/social-media/instagram.png">
               </a>
-              <a class="d-inline-block" href="#" alt="FOPC en Facebook" target="_blank">
+              <a class="d-inline-block me-1" href="#" alt="FOPC en Facebook" target="_blank">
                 <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/icons/social-media/facebook.png">
               </a>
+              <a class="d-inline-block" href="#" alt="FOPC en YouTube" target="_blank">
+                <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/icons/social-media/youtube.png">
+              </a>
             </div>
-            
+
             <p class="h6 text-primary">Federación Odontológica<br> de la Provincia de Córdoba</p>
             <p><a href="#" target="_blank" class="link-primary text-decoration-none">#LAFEDERACIONSOMOSTODOS</a></p>
           </div>
@@ -63,28 +66,28 @@
 
   <section id="sponsors" class="bg-primary">
     <?php wp_reset_postdata();
-    
+
     $query = new WP_Query(array(
       'post_type' => 'sponsor',
       'nopaging'  => 'true'
-    )); 
-  
-    if ( $query->have_posts() ) : ?>
+    ));
+
+    if ($query->have_posts()) : ?>
       <div class="sponsors-carousel">
-        <?php while ( $query->have_posts() ):
-        $query->the_post();
-          
-        $flyer = get_field('flyer_promo'); ?>
-        <div class="sponsor">
-          <?php if(!empty($flyer)): ?>
-          <a href="<?php echo $flyer['url']; ?>">
-            <img src="<?php echo get_the_post_thumbnail_url(); ?>">
-          </a>
-          <?php else: ?>
-            <img src="<?php echo get_the_post_thumbnail_url(); ?>">
-          <?php endif; ?>
-        </div><!-- /.sponsor -->
-      <?php endwhile; ?>
+        <?php while ($query->have_posts()) :
+          $query->the_post();
+
+          $flyer = get_field('flyer_promo'); ?>
+          <div class="sponsor">
+            <?php if (!empty($flyer)) : ?>
+              <a href="<?php echo $flyer['url']; ?>">
+                <img src="<?php echo get_the_post_thumbnail_url(); ?>">
+              </a>
+            <?php else : ?>
+              <img src="<?php echo get_the_post_thumbnail_url(); ?>">
+            <?php endif; ?>
+          </div><!-- /.sponsor -->
+        <?php endwhile; ?>
       </div><!-- /.sponsors-carousel -->
     <?php endif; ?>
   </section><!-- #sponsors -->
@@ -106,4 +109,5 @@
 <?php wp_footer(); ?>
 
 </body>
+
 </html>
