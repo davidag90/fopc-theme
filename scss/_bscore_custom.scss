@@ -566,3 +566,7 @@
   color: $light;
   text-align: center;
 }
+
+.dataTables_wrapper > .dataTables_filter input[type="search"] {
+	border: 1px solid $primary;
+}
