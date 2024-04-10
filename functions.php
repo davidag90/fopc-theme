@@ -1081,38 +1081,44 @@ add_shortcode('fed-clasificados', 'loop_fed_clasificados');
 // ------------
 function init_searchbox_incrementos() {
   ob_start();
+ 
   echo '<form method="get" class="row gy-2 gx-3 align-items-center mb-5" action="' . get_permalink() . '">';
-  echo '<div class="col-auto">';
-  echo '<label class="visually-hidden" for="anio">Año:</label>';
-  echo '<select class="form-select" aria-label="Año" name="anio" id="anio">';
-  echo '<option selected>Seleccionar año...</option>';
-  echo '<option value="2024">2024</option>';
-  echo '<option value="2023">2023</option>';
-  echo '<option value="2022">2022</option>';
-  echo '<option value="2021">2021</option>';
-  echo '</select>';
-  echo '</div>';
-  echo '<div class="col-auto">';
-  echo '<label class="visually-hidden" for="mes">Mes</label>';
-  echo '<select class="form-select" aria-label="Mes" name="mes" id="mes">';
-  echo '<option selected>Seleccionar mes...</option>';
-  echo '<option value="01">Enero</option>';
-  echo '<option value="02">Febrero</option>';
-  echo '<option value="03">Marzo</option>';
-  echo '<option value="04">Abril</option>';
-  echo '<option value="05">Mayo</option>';
-  echo '<option value="06">Junio</option>';
-  echo '<option value="07">Julio</option>';
-  echo '<option value="08">Agosto</option>';
-  echo '<option value="09">Septiembre</option>';
-  echo '<option value="10">Octubre</option>';
-  echo '<option value="11">Noviembre</option>';
-  echo '<option value="12">Diciembre</option>';
-  echo '</select>';
-  echo '</div>';
-  echo '<div class="col-auto">';
-  echo '<button type="submit" class="btn btn-primary">Buscar</button>';
-  echo '</div>';
+    echo '<div class="col-auto">';
+      echo '<label class="visually-hidden" for="anio">Año:</label>';
+      echo '<select class="form-select" aria-label="Año" name="anio" id="anio">';
+        echo '<option selected>Seleccionar año...</option>';
+
+        $ano_limite = 2021;
+        $ano_actual = intval(date("Y"));
+        $i = $ano_actual;
+
+        while($i >= $ano_limite) {
+            echo '<option value="' . strval($i) . '">' . strval($i) . '</option>';
+            $i--;
+        }      
+      echo '</select>'; // .form-select
+    echo '</div>'; // .col-auto
+    echo '<div class="col-auto">';
+      echo '<label class="visually-hidden" for="mes">Mes</label>';
+      echo '<select class="form-select" aria-label="Mes" name="mes" id="mes">';
+        echo '<option selected>Seleccionar mes...</option>';
+        echo '<option value="01">Enero</option>';
+        echo '<option value="02">Febrero</option>';
+        echo '<option value="03">Marzo</option>';
+        echo '<option value="04">Abril</option>';
+        echo '<option value="05">Mayo</option>';
+        echo '<option value="06">Junio</option>';
+        echo '<option value="07">Julio</option>';
+        echo '<option value="08">Agosto</option>';
+        echo '<option value="09">Septiembre</option>';
+        echo '<option value="10">Octubre</option>';
+        echo '<option value="11">Noviembre</option>';
+        echo '<option value="12">Diciembre</option>';
+      echo '</select>'; // .form-select
+    echo '</div>'; // .col-auto
+    echo '<div class="col-auto">';
+      echo '<button type="submit" class="btn btn-primary">Buscar</button>';
+    echo '</div>'; // .col-auto
   echo '</form>';
 
   $output = ob_get_clean();
@@ -1129,36 +1135,43 @@ add_shortcode('searchbox-incrementos','init_searchbox_incrementos');
 function init_searchbox_novedades() {
   ob_start();
   echo '<form method="get" class="row gy-2 gx-3 align-items-center mb-5" action="' . get_permalink() . '">';
-  echo '<div class="col-auto">';
-  echo '<label class="visually-hidden" for="anio">Año:</label>';
-  echo '<select class="form-select" aria-label="Año" name="anio" id="anio">';
-  echo '<option selected>Seleccionar año...</option>';
-  echo '<option value="2023">2023</option>';
-  echo '<option value="2022">2022</option>';
-  echo '<option value="2021">2021</option>';
-  echo '</select>';
-  echo '</div>';
-  echo '<div class="col-auto">';
-  echo '<label class="visually-hidden" for="mes">Mes</label>';
-  echo '<select class="form-select" aria-label="Mes" name="mes" id="mes">';
-  echo '<option selected>Seleccionar mes...</option>';
-  echo '<option value="01">Enero</option>';
-  echo '<option value="02">Febrero</option>';
-  echo '<option value="03">Marzo</option>';
-  echo '<option value="04">Abril</option>';
-  echo '<option value="05">Mayo</option>';
-  echo '<option value="06">Junio</option>';
-  echo '<option value="07">Julio</option>';
-  echo '<option value="08">Agosto</option>';
-  echo '<option value="09">Septiembre</option>';
-  echo '<option value="10">Octubre</option>';
-  echo '<option value="11">Noviembre</option>';
-  echo '<option value="12">Diciembre</option>';
-  echo '</select>';
-  echo '</div>';
-  echo '<div class="col-auto">';
-  echo '<button type="submit" class="btn btn-primary">Buscar</button>';
-  echo '</div>';
+    echo '<div class="col-auto">';
+      echo '<label class="visually-hidden" for="anio">Año:</label>';
+      echo '<select class="form-select" aria-label="Año" name="anio" id="anio">';
+        echo '<option selected>Seleccionar año...</option>';
+
+        $ano_limite = 2021;
+        $ano_actual = intval(date("Y"));
+        $i = $ano_actual;
+
+        while($i >= $ano_limite) {
+            echo '<option value="' . strval($i) . '">' . strval($i) . '</option>';
+            $i--;
+        }
+
+      echo '</select>'; // .form-select
+    echo '</div>'; // .col-auto
+    echo '<div class="col-auto">';
+      echo '<label class="visually-hidden" for="mes">Mes</label>';
+      echo '<select class="form-select" aria-label="Mes" name="mes" id="mes">';
+        echo '<option selected>Seleccionar mes...</option>';
+        echo '<option value="01">Enero</option>';
+        echo '<option value="02">Febrero</option>';
+        echo '<option value="03">Marzo</option>';
+        echo '<option value="04">Abril</option>';
+        echo '<option value="05">Mayo</option>';
+        echo '<option value="06">Junio</option>';
+        echo '<option value="07">Julio</option>';
+        echo '<option value="08">Agosto</option>';
+        echo '<option value="09">Septiembre</option>';
+        echo '<option value="10">Octubre</option>';
+        echo '<option value="11">Noviembre</option>';
+        echo '<option value="12">Diciembre</option>';
+      echo '</select>'; // .form-select
+    echo '</div>'; // .col-auto
+    echo '<div class="col-auto">';
+      echo '<button type="submit" class="btn btn-primary">Buscar</button>';
+    echo '</div>'; // .col-auto
   echo '</form>';
 
   $output = ob_get_clean();
@@ -1250,12 +1263,23 @@ function agregar_pago_deb_liq_prof( $gateways ) {
 add_filter( 'woocommerce_payment_gateways', 'agregar_pago_deb_liq_prof' );
 
 /**
-* Clase para el método de pago personalizado.
-*/
-class DebitoLiqProf extends WC_Payment_Gateway {
+ * Clase para el método de pago personalizado.
+ *
+ * @property id $id
+ * @property icon $icon
+ * @property method_title $method_title
+ * @property title $title
+ * @property description $description
+ * @property method_description $method_description
+ * @property supports $supports
+ * @property form_fields $form_fields
+ *
+ */
+
+ class DebitoLiqProf extends WC_Payment_Gateway {
   
   /**
-   * Constructor de la clase.
+   * Constructor de la clase
    */
   public function __construct() {
       $this->id                 = 'pago_deb_liq_prof';
