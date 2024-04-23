@@ -16,8 +16,6 @@
 get_header();
 ?>
 
-
-
 <div id="content" class="site-content container">
   <div class="width-100">
 		<header class="page-header d-flex align-items-center bg-primary text-light mb-5" style="background-image: url('https://fopc.org.ar/wp-content/themes/fopc-theme/img/header-imprenta.jpg');">
@@ -26,9 +24,13 @@ get_header();
 	</div>
 
   <div id="primary" class="content-area">
-
-    <!-- Hook to add something nice -->
-    <?php bs_after_primary(); ?>
+    <?php if(!isset($_COOKIE['alert_imprenta'])): ?>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      
+        <strong>Imprenta:</strong> servicio exclusivo para <strong>Profesionales Federados Activos</strong>
+      </div>
+    <?php endif; ?>
 
     <main id="main" class="site-main">
       <!-- Breadcrumb -->

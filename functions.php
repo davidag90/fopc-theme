@@ -55,6 +55,15 @@ function bootscore_child_enqueue_styles() {
 }
 
 
+// Alert para páginas de imprenta
+function cookie_alert_imprenta() {
+  if(is_woocommerce() && !isset($_COOKIE['alert_imprenta'])) {
+      setcookie('alert_imprenta', 'true', time() + 604800, '/');
+  }
+}
+
+add_action('wp', 'cookie_alert_imprenta');
+
 // Custom Sidebars
 if (!function_exists('custom_sidebars_init')) :
   function custom_sidebars_init() {
@@ -720,39 +729,32 @@ function loop_cursos_congresos() {
   $query = new WP_Query($args);
   
   if ($query->have_posts()) {
-    echo '<div class="row row-cols-1 row-cols-md-2 row-cols-xxl-3 mb-5">';
+    echo '<div id="cursos-congresos">';
     
     while ($query->have_posts()) {
       $query->the_post();
 
       $fecha_evento = get_post_field('fecha_evento');
-      $lugar = get_post_field('lugar');
       $organizador = get_post_field('organizador');
-      $metodo_inscripcion = get_post_field('metodo_inscripcion');
-      $mas_info = get_post_field('mas_info');
+      $mas_info = get_the_permalink();
       $contacto = get_post_field('contacto');
       $thumbnail = get_the_post_thumbnail_url();
 
-      echo '<div class="col pb-5 pb-md-0">';
-      echo '<div class="card h-100 text-center">';
-      echo '<a href="' . $thumbnail . '"><img class="card-img-top border-bottom border-dark-subtle" src="' . $thumbnail . '"></a>';
-      echo '<div class="card-body d-flex flex-column justify-content-start">';
-      echo '<h2 class="h5 card-title">' . get_the_title() . '</h2>';
-      echo '<div class="card-text">' . the_content() . '</div>';
-      echo '<p class="card-text"><strong>Inicia:</strong> ' . $fecha_evento . '</p>';
-      echo '<p class="card-text"><strong>Lugar:</strong> ' . $lugar . '</p>';
-      echo '<p class="card-text"><strong>Inscripción:</strong> ' . $metodo_inscripcion . '</p>';
-      echo '<p class="card-text"><strong>Organiza:</strong> ' . $organizador . '</p>';
-      echo '<p class="card-text"><strong>Contacto:</strong> ' . $contacto . '</p>';
-      if(!empty($mas_info)):
-      echo '<div class="card-text"><a href="' . $mas_info . '" class="btn btn-primary">Más información</a></div>';
-      endif;
-      echo '</div>';
-      echo '</div>';
+      echo '<div class="card">';
+        echo '<a href="' . $thumbnail . '" class="d-block"><img src="' . $thumbnail . '" class="h-100"></a>';
+        echo '<div class="card-body">';
+          echo '<h2 class="h5 card-title">' . get_the_title() . '</h2>';
+          echo '<p class="card-text"><strong>Inicia:</strong> ' . $fecha_evento . '</p>';
+          echo '<p class="card-text"><strong>Organiza:</strong> ' . $organizador . '</p>';
+          echo '<p class="card-text"><strong>Contacto:</strong> ' . $contacto . '</p>';
+          if(!empty($mas_info)):
+          echo '<div class="card-text"><a href="' . $mas_info . '" class="btn btn-primary">Más información</a></div>';
+          endif;
+        echo '</div>';
       echo '</div>';
     }
     
-    echo '</div>';
+    echo '</div>'; // #cursos-congresos
 
     wp_reset_postdata(); // Restablece los datos del post original
   } else {

@@ -570,3 +570,16 @@
 .dataTables_wrapper > .dataTables_filter input[type="search"] {
 	border: 1px solid $primary;
 }
+
+#cursos-congresos .card {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+#cursos-congresos .card img {
+  object-fit: cover;
+}
+
+#cursos-congresos .card + .card {
+  margin-top: $spacer * 1.5;
+}
