@@ -14,7 +14,7 @@ get_header(); ?>
 	</div>
 	
 	<div class="row">
-		<div class="col">
+		<div class="col-lg-8">
 			<div id="primary" class="content-area">
 				<!-- Hook to add something nice -->
 				<?php bs_after_primary(); ?>

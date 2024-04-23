@@ -10,7 +10,7 @@ get_header();
 
 <div id="content" class="site-content container">
   <div class="width-100">
-  <header class="page-header d-flex align-items-center bg-primary text-light mb-5" style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/img/header-noticias.jpg');">
+    <header class="page-header d-flex align-items-center bg-primary text-light mb-5" style="background-image:url('<?php echo get_stylesheet_directory_uri(); ?>/img/header-noticias.jpg');">
 			<p class="h1 page-title">Noticias</p> <!-- Ojo, atento si más adelante se usa la plantilla de post-default para otras categorias que no sean solo Noticias, requiere adaptación -->
 		</header>
 	</div>
