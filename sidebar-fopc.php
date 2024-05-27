@@ -38,7 +38,7 @@ if (!is_active_sidebar('sidebar-fopc')) {
           <div class="text-bg-primary border-0 rounded p-4">
             <h3 class="h4 text-center">Beneficio para Recién Matriculados</h3>
 
-            <p>Si vas a federarte <strong>dentro de los 180 días </strong>posteriores a matricularte en el <strong>Colegio Odontológico de Córdoba</strong>, te eximimos por un lapso de 12 meses del pago de:</p>
+            <p>Si vas a federarte <strong>dentro de los 180 días </strong>posteriores a matricularte en el <strong>Colegio Odontológico de Córdoba</strong>, te eximimos por un lapso de 6 (seis) meses del pago de:</p>
 
             <ul class="fa-ul">
               <li>Cuota de <strong>DASO</strong></li>
