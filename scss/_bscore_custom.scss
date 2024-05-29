@@ -576,7 +576,17 @@
   grid-template-columns: 1fr;
 }
 
+#cursos-congresos .card img {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
 @include media-breakpoint-up(sm) {
+  #cursos-congresos .card img {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+
   #cursos-congresos .card {
     display: grid;
     grid-template-columns: 1fr 2fr;
