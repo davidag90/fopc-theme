@@ -573,7 +573,14 @@
 
 #cursos-congresos .card {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr;
+}
+
+@include media-breakpoint-up(sm) {
+  #cursos-congresos .card {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
 }
 
 #cursos-congresos .card img {
@@ -581,7 +588,7 @@
 }
 
 #cursos-congresos .card + .card {
-  margin-top: $spacer * 1.5;
+  margin-top: $spacer * 1.75;
 }
 
 #banner-cursos a {
