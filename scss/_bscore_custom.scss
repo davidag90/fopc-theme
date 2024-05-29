@@ -584,6 +584,7 @@
 @include media-breakpoint-up(sm) {
   #cursos-congresos .card img {
     border-top-left-radius: 5px;
+    border-top-right-radius: 0px;
     border-bottom-left-radius: 5px;
   }
 
