@@ -41,6 +41,7 @@ if (!is_active_sidebar('sidebar-fopc')) {
             <p>Si vas a federarte <strong>dentro de los 180 días </strong>posteriores a matricularte en el <strong>Colegio Odontológico de Córdoba</strong>, te eximimos por un lapso de 6 (seis) meses del pago de:</p>
 
             <ul class="fa-ul">
+              <li>Cuota de <strong>Gasto Administrativo Mínimo</strong></li>
               <li>Cuota de <strong>DASO</strong></li>
               <li>Cuota de <strong>Prorrateo </strong>y <strong>Servicios</strong></li>
               <li>Cuota del <strong>Seguro de Mala Praxis</strong></li>
