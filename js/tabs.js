@@ -1,14 +1,3 @@
-const currentURL = window.location.href;
-const tabList = [].slice.call(document.querySelectorAll('#fopc-tabs a'));
-
-document.addEventListener('DOMContentLoaded', createTabs(tabList));
-
-if(currentURL.includes("#")) {
-    const urlHash = window.location.hash;
-
-    document.addEventListener('DOMContentLoaded', fireInitTab(urlHash, tabList));
-}
-
 function fireInitTab(urlHash, tabList) {
     tabList.forEach(triggerEl => {
         let triggerLink = triggerEl.getAttribute('href');
@@ -31,3 +20,14 @@ function createTabs(tabList) {
         });
     });
 }
+
+const currentURL = window.location.href;
+const tabList = [].slice.call(document.querySelectorAll('#fopc-tabs a'));
+
+if(currentURL.includes("#")) {
+    const urlHash = window.location.hash;
+
+    document.addEventListener('DOMContentLoaded', fireInitTab(urlHash, tabList));
+}
+
+document.addEventListener('DOMContentLoaded', createTabs(tabList));
