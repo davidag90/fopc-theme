@@ -15,7 +15,9 @@ get_header();
     <div class="row">
       <div class="col-md-8">
         <main id="main" class="site-main">
-        <?php the_post();
+        <?php
+        
+        the_post();
         
         $terms = wp_get_post_terms(get_the_ID(), 'obras-sociales');
 
@@ -25,6 +27,7 @@ get_header();
           foreach ($terms as $term) {
             array_push($obras_sociales, $term->name);
           }
+          
           $obra_social = join(', ', $obras_sociales);
         } else {
           $obra_social = '';
