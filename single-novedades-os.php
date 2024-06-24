@@ -17,15 +17,18 @@ get_header();
         <main id="main" class="site-main">
         <?php the_post();
         
-        $terms = get_the_terms(get_the_ID(), 'obras-sociales');
+        $terms = wp_get_post_terms(get_the_ID(), 'obras-sociales');
 
         $obras_sociales = [];
 
-        foreach ($terms as $term) {
-          array_push($obras_sociales, $term->name);
+        if( ! empty($terms) ) {
+          foreach ($terms as $term) {
+            array_push($obras_sociales, $term->name);
+          }
+          $obra_social = join(', ', $obras_sociales);
+        } else {
+          $obra_social = '';
         }
-        
-        $obra_social = join(', ', $obras_sociales);
         
         ?>
 
