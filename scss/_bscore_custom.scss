@@ -442,7 +442,8 @@
 }
 
 .top-button {
-  right: 20px;
+  right: auto;
+  left: 20px;
   bottom: 20px;
   opacity: 0;
   transition: opacity 1s;
@@ -453,9 +454,9 @@
 }
 
 .whatsapp-button {
-  bottom: 20px;
+  bottom: 25px;
   height: 48px;
-  right: 70px;
+  left: 70px;
   opacity: 1;
   width: 48px;
   border-radius: 50%;
