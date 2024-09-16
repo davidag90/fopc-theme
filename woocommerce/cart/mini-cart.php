@@ -15,7 +15,7 @@
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 7.9.0
+ * @version 9.3.0
  */
 
 defined('ABSPATH') || exit;
@@ -42,7 +42,7 @@ do_action('woocommerce_before_mini_cart'); ?>
         $thumbnail         = apply_filters('woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key);
         $product_price     = apply_filters('woocommerce_cart_item_price', WC()->cart->get_product_price($_product), $cart_item, $cart_item_key);
         $product_permalink = apply_filters('woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink($cart_item) : '', $cart_item, $cart_item_key);
-        ?>
+    ?>
         <div class="woocommerce-mini-cart-item list-group-item <?php echo esc_attr(apply_filters('woocommerce_mini_cart_item_class', 'mini_cart_item', $cart_item, $cart_item_key)); ?>">
 
           <div class="row">
@@ -84,7 +84,7 @@ do_action('woocommerce_before_mini_cart'); ?>
                   '<a href="%s" class="remove_from_cart_button text-danger" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s"><i class="fa-regular fa-trash-can"></i></a>',
                   esc_url(wc_get_cart_remove_url($cart_item_key)),
                   /* translators: %s is the product name */
-                  esc_attr( sprintf( __( 'Remove %s from cart', 'woocommerce' ), wp_strip_all_tags( $product_name ) ) ),
+                  esc_attr(sprintf(__('Remove %s from cart', 'woocommerce'), wp_strip_all_tags($product_name))),
                   esc_attr($product_id),
                   esc_attr($cart_item_key),
                   esc_attr($_product->get_sku())
@@ -98,7 +98,7 @@ do_action('woocommerce_before_mini_cart'); ?>
           <!--row-->
 
         </div>
-        <?php
+    <?php
       }
     }
 
