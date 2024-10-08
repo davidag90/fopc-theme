@@ -1,9 +1,10 @@
 <?php
+
 /**
  * Template Post Type: post
  */
 
-get_header();  
+get_header();
 ?>
 
 <div id="content" class="site-content container">
@@ -14,7 +15,7 @@ get_header();
 
     <div class="row">
       <div class="col">
-        <main id="main" class="site-main">
+        <main id="main" class="site-main pb-5">
 
           <header class="entry-header">
             <?php the_post(); ?>
