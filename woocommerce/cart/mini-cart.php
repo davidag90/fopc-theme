@@ -15,14 +15,14 @@
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 9.3.0
+ * @version 9.4.0
  */
 
 defined('ABSPATH') || exit;
 
 do_action('woocommerce_before_mini_cart'); ?>
 
-<?php if (!WC()->cart->is_empty()) : ?>
+<?php if (WC()->cart && ! WC()->cart->is_empty()) : ?>
 
   <div class="woocommerce-mini-cart cart_list product_list_widget list-group list-group-flush <?php echo esc_attr($args['list_class']); ?>">
     <?php
@@ -36,7 +36,7 @@ do_action('woocommerce_before_mini_cart'); ?>
         /**
          * This filter is documented in woocommerce/templates/cart/cart.php.
          *
-         @since 2.1.0
+         * @since 2.1.0
          */
         $product_name      = apply_filters('woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key);
         $thumbnail         = apply_filters('woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key);
@@ -118,6 +118,8 @@ do_action('woocommerce_before_mini_cart'); ?>
       do_action('woocommerce_widget_shopping_cart_total');
       ?>
     </p>
+
+    <p class="text-muted small shipping-text"><?php esc_html_e('To find out your shipping cost, please proceed to checkout.', 'bootscore'); ?></p>
 
     <?php do_action('woocommerce_widget_shopping_cart_before_buttons'); ?>
 
