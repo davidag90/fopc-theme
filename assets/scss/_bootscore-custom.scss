@@ -1,0 +1,625 @@
+/* inter-regular - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/inter-v12-latin-regular.eot");
+  /* IE9 Compat Modes */
+  src: url("../fonts/inter-v12-latin-regular.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */
+    url("../fonts/inter-v12-latin-regular.woff2") format("woff2"),
+    /* Super Modern Browsers */
+    url("../fonts/inter-v12-latin-regular.woff") format("woff"),
+    /* Modern Browsers */
+    url("../fonts/inter-v12-latin-regular.ttf") format("truetype"),
+    /* Safari, Android, iOS */
+    url("../fonts/inter-v12-latin-regular.svg#Inter") format("svg");
+  /* Legacy iOS */
+}
+
+/* inter-700 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/inter-v12-latin-700.eot");
+  /* IE9 Compat Modes */
+  src: url("../fonts/inter-v12-latin-700.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */
+    url("../fonts/inter-v12-latin-700.woff2") format("woff2"),
+    /* Super Modern Browsers */
+    url("../fonts/inter-v12-latin-700.woff") format("woff"),
+    /* Modern Browsers */
+    url("../fonts/inter-v12-latin-700.ttf") format("truetype"),
+    /* Safari, Android, iOS */
+    url("../fonts/inter-v12-latin-700.svg#Inter") format("svg");
+  /* Legacy iOS */
+}
+
+/*=======================*/
+
+.site {
+  padding-top: 66px;
+}
+
+@include media-breakpoint-up(md) {
+  .site {
+    padding-top: 86px;
+  }
+}
+
+.navbar-brand.xs>img {
+  height: 40px;
+}
+
+.navbar-brand.md>img {
+  height: 60px;
+}
+
+.navbar-nav>.menu-item>.nav-link {
+  font-weight: 700;
+}
+
+.navbar-nav>.menu-item>.nav-link {
+  color: scale-color($color: $dark, $lightness: 25%);
+}
+
+.navbar-nav>.menu-item>.nav-link.active {
+  text-decoration: underline;
+}
+
+.navbar-nav>.menu-item>.nav-link:hover {
+  color: scale-color($color: $dark, $lightness: 50%);
+}
+
+.navbar-nav>.menu-item>.nav-link.dropdown-toggle::after {
+  font: var(--fa-font-solid);
+  content: "\f107";
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  border: 0;
+  vertical-align: middle;
+}
+
+.navbar-nav>.menu-item:last-child>.dropdown-menu {
+  left: auto;
+  right: 0;
+}
+
+.pres-fact {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 1rem;
+}
+
+.pres-fact .wp-block-image {
+  margin: 0 !important;
+  width: 100%;
+}
+
+.pres-fact .wp-block-image>img {
+  width: 100% !important;
+  max-width: 110px;
+}
+
+.pres-fact>div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pres-fact p {
+  margin-bottom: 0.5rem;
+}
+
+.pres-fact p:last-child {
+  margin-bottom: 0;
+}
+
+@include media-breakpoint-up(sm) {
+  .pres-fact img {
+    max-width: 100%;
+  }
+}
+
+#accesos-rapidos>a {
+  margin: 0 1rem;
+  padding: 0;
+  min-width: 110px;
+  max-width: 120px;
+}
+
+#accesos-rapidos>a>div>figure,
+#accesos-rapidos>a>div>figure>img {
+  min-width: 120px;
+  max-width: 100%;
+}
+
+.footer_widget>.wsf-form .invalid-feedback {
+  color: $warning !important;
+}
+
+.footer_widget>.wsf-form .form-text {
+  color: #f0f0f0;
+}
+
+// Correccion de espacios a los costados de form en widgets de sidebar
+.widget>.wsf-form>.row>.col-12,
+.widget>.wsf-form>.row>.col-12>.row>.col-12 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.cards .swiper-button-next,
+.cards .swiper-button-prev,
+.cards-autoplay .swiper-button-next,
+.cards-autoplay .swiper-button-prev {
+  color: #fff !important;
+}
+
+.cards .swiper-pagination-bullet,
+.cards-autoplay .swiper-pagination-bullet {
+  background: #fff !important;
+  opacity: 0.5 !important;
+  height: 12px !important;
+  width: 12px !important;
+}
+
+.cards .swiper-pagination-bullet-active,
+.cards-autoplay .swiper-pagination-bullet-active {
+  background-color: $warning !important;
+}
+
+.slick-slide {
+  margin: 0 1rem;
+}
+
+.wp-block-embed-youtube>div>iframe {
+  width: 100%;
+}
+
+@include media-breakpoint-up(sm) {
+  .page-quienes-somos .page-content #historia-fopc figure.wp-block-image {
+    width: 50%;
+  }
+}
+
+.wp-block-quote {
+  margin-bottom: 1rem;
+  padding-left: 1.25rem;
+  font-size: 1.75rem;
+  border-left: 3px solid $secondary;
+}
+
+.wp-block-quote>p {
+  margin-bottom: 0;
+  font-style: italic;
+}
+
+.wp-block-quote>cite {
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+  font-size: 0.75em;
+  color: #6c757d;
+}
+
+.wp-block-quote>cite::before {
+  content: "— ";
+}
+
+.page-prestamos .page-content .wp-block-image>figcaption {
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.85);
+}
+
+.table {
+  word-wrap: normal !important;
+  word-break: keep-all !important;
+}
+
+.woocommerce-loop-product__title {
+  font-size: 1.25rem;
+}
+
+.fa-ul>li {
+  margin-bottom: 0.5rem;
+}
+
+// Corrección para eliminar icono incongruente en componentes ".alert"
+// utilizados en páginas de Subsidios y Préstamos
+.page-subsidios .alert::before,
+.page-prestamos .alert::before {
+  content: none !important;
+}
+
+.page-subsidios .alert,
+.page-subsidios .alert {
+  padding: 1rem !important;
+}
+
+.novedad-os>a>span {
+  font-size: calc(16px * 0.75);
+}
+
+#logos-seguros img {
+  padding-bottom: 3rem;
+  max-width: 75%;
+}
+
+#sol-constancia-seg {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@include media-breakpoint-up(md) {
+  #logos-seguros img {
+    max-width: 300px;
+  }
+}
+
+.widget>.list-group-flush>.list-group-item {
+  border-bottom: 1px solid $secondary;
+}
+
+.widget>.list-group-flush>.list-group-item:last-child {
+  border: 0;
+}
+
+#incrementos .cpt-carousel .card {
+  min-height: 14rem;
+}
+
+#incrementos .cpt-carousel .card>.card-body>.card-title {
+  line-height: 1.5rem;
+}
+
+#novedades-os .cpt-carousel .card {
+  min-height: 22rem;
+}
+
+#novedades-os .cpt-carousel .card>.card-body>.card-title {
+  list-style: 1.25rem;
+}
+
+#novedades-os .cpt-carousel .card>.card-body>.card-text {
+  list-style: 1.25rem;
+}
+
+#sponsors img {
+  height: 32px;
+}
+
+#form-comite-ejec {
+  max-width: 800px;
+}
+
+#fopc-tabs>.nav-link {
+  font-size: 1.1rem;
+}
+
+#fopc-tabs>.nav-link>span {
+  display: none;
+}
+
+#fopc-tabs>.nav-link.active>span {
+  display: inline;
+}
+
+@include media-breakpoint-up(lg) {
+  #fopc-tabs>.nav-link>span {
+    display: inline;
+  }
+}
+
+#fopc-tabs-content h2 {
+  color: $primary;
+  font-size: $font-size-base * 1.75;
+  margin-bottom: 2.5rem;
+}
+
+#fopc-tabs-content h3 {
+  color: $primary;
+  font-size: $font-size-base * 1.5;
+}
+
+#fopc-tabs-content h4 {
+  color: $primary;
+  font-size: $font-size-base * 1.25;
+}
+
+#modal-agenda .btn-close {
+  color: #fff;
+  background: transparent url("../img/close.svg") center / 1.5rem auto no-repeat;
+}
+
+.page-header {
+  height: 20vh;
+  min-height: 8rem;
+  background-position: top right;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.page-header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom,
+      rgba(92, 92, 230, 0.6) 0%,
+      rgba(92, 92, 230, 0.8) 100%);
+  z-index: 0;
+}
+
+.page-title {
+  z-index: 1;
+}
+
+@include media-breakpoint-up(lg) {
+  .page-header::after {
+    display: none;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .page-title {
+    font-size: 2rem;
+    margin: 0;
+    max-width: 50vw;
+  }
+}
+
+.head-encuentro {
+  background: $primary;
+  color: $light;
+  padding-left: 2.75rem;
+  margin: 0.25rem 0 0 0;
+  width: 100%;
+  line-height: 3.25rem;
+  height: 3.25rem;
+  font-size: 1.5rem;
+}
+
+.head-icon-background {
+  background-color: $dark;
+  border-radius: 50%;
+  color: white;
+  display: inline-block;
+  height: 4rem;
+  line-height: 4rem;
+  margin-right: -2rem;
+  text-align: center;
+  width: 4rem;
+  font-size: 1.75rem;
+  z-index: 100;
+}
+
+#sponsors>.width-100>.d-flex {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.page-formato-radiografia-digital .page-content>.wp-block-image>img {
+  max-width: 400px;
+}
+
+.social-media>a {
+  width: 40px;
+}
+
+.social-media>a>img {
+  width: 100%;
+  height: auto;
+}
+
+.bootscore-footer {
+  border-top-left-radius: $border-radius-2xl;
+  border-top-right-radius: $border-radius-2xl;
+}
+
+#sponsors {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  padding-left: 36px;
+  padding-right: 36px;
+}
+
+.sponsors-carousel .slick-next,
+.sponsors-carousel .slick-prev {
+  width: 24px;
+  height: 24px;
+}
+
+.sponsors-carousel .slick-next {
+  right: -30px;
+}
+
+.sponsors-carousel .slick-prev {
+  left: -30px;
+}
+
+.top-button {
+  right: auto;
+  left: 20px;
+  bottom: 23px;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.top-button.visible {
+  opacity: 1;
+}
+
+.whatsapp-button {
+  bottom: 20px;
+  height: 48px;
+  left: 70px;
+  opacity: 1;
+  width: 48px;
+  border-radius: 50%;
+}
+
+#incremento-aranceles-front .carousel-control-prev,
+#incremento-aranceles-front .carousel-control-next,
+#novedades-os-front .carousel-control-prev,
+#novedades-os-front .carousel-control-next {
+  align-items: center;
+  background: 0 0;
+  border: 0;
+  bottom: -40px;
+  color: $primary;
+  display: flex;
+  justify-content: center;
+  opacity: 0.6;
+  padding: 0;
+  position: absolute;
+  text-align: center;
+  transition: opacity 0.15s ease;
+  top: unset;
+  z-index: 1;
+}
+
+#incremento-aranceles-front .carousel-control-prev,
+#novedades-os-front .carousel-control-prev {
+  left: -12px;
+}
+
+#incremento-aranceles-front .carousel-control-next,
+#novedades-os-front .carousel-control-next {
+  right: -12px;
+}
+
+.screenshot-instrucciones img {
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+  border-radius: $border-radius;
+  width: 100%;
+}
+
+.screenshot-instrucciones>figcaption {
+  font-size: $font-size-base * 0.9;
+  text-align: right;
+}
+
+#sidebar-telefonos a {
+  color: $light;
+}
+
+.novedad-os {
+  border-bottom: 1px solid $gray-300;
+  margin-bottom: 1.5rem;
+}
+
+.novedad-os:last-of-type {
+  border-bottom: 0;
+}
+
+#hero-carousel {
+  position: relative;
+  width: 100%;
+}
+
+#hero-carousel .item {
+  display: block;
+  width: 100%;
+}
+
+.owl-nav {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #141433;
+  width: 100%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  font-size: 1rem;
+}
+
+@include media-breakpoint-up(md) {
+  .owl-nav {
+    font-size: 2.5rem;
+  }
+}
+
+.noticia-front-thumbnail {
+  height: 30vh;
+}
+
+@include media-breakpoint-up(sm) {
+  .noticia-front-thumbnail {
+    height: 180px;
+  }
+}
+
+#fedclasificados-front {
+  background-color: $primary;
+  background-image: url('../img/megaphone.png');
+  background-position: bottom left;
+  background-repeat: no-repeat;
+  background-size: 75%;
+  min-height: 100%;
+  color: $light;
+  text-align: center;
+}
+
+.dataTables_wrapper>.dataTables_filter input[type="search"] {
+  border: 1px solid $primary;
+}
+
+#cursos-congresos .curso {
+  display: grid;
+  gap: $spacer;
+  grid-template-columns: 1fr;
+}
+
+#cursos-congresos .curso img {
+  object-fit: cover;
+  max-width: 280px;
+  margin: 0 auto;
+  display: block;
+}
+
+@include media-breakpoint-up(sm) {
+  #cursos-congresos .curso {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  #cursos-congresos .curso img {
+    max-width: auto;
+    margin: 0;
+  }
+}
+
+
+#cursos-congresos .curso+.curso {
+  margin-top: $spacer * 1.75;
+  padding-top: $spacer * 1.75;
+  border-top: 1px solid rgba($primary, 0.25);
+}
+
+#banner-cursos a {
+  text-decoration: none;
+  color: white;
+}
+
+#comision figure {
+  max-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.logo-carousel img {
+  aspect-ratio: 1;
+}
