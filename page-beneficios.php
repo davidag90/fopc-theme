@@ -17,9 +17,6 @@ get_header();
 	</div>
 
 	<div id="primary" class="content-area">
-		<!-- Hook to add something nice -->
-
-
 		<main id="main" class="site-main">
 			<div class="row mb-5">
 				<div class="col">
@@ -34,10 +31,6 @@ get_header();
 			</div>
 
 			<div class="row">
-				<div class="col-12">
-					<h2 class="text-center mb-5 text-primary" id="head-beneficios">Beneficios para Federados</h2>
-				</div>
-
 				<div class="col-md-4 col-xxl-3">
 					<div id="resumen-rubros" class="list-group mb-5">
 						<button id="todos" class="list-group-item list-group-item-primary list-group-item-action active filtro-rubro">Todos</button>
