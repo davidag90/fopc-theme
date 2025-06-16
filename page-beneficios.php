@@ -26,8 +26,6 @@ get_header();
 						<?php the_content(); ?>
 					</div>
 				</div>
-
-				<?php get_sidebar('daso'); ?>
 			</div>
 
 			<div class="row">
