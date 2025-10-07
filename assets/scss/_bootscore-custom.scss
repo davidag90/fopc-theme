@@ -42,22 +42,13 @@
 
 /*=======================*/
 
-.site {
-  padding-top: 66px;
-}
-
-@include media-breakpoint-up(md) {
-  .site {
-    padding-top: 86px;
-  }
-}
-
-.navbar-brand.xs>img {
+.navbar-brand>img {
   height: 40px;
 }
-
-.navbar-brand.md>img {
-  height: 60px;
+@include media-breakpoint-up(md) {
+  .navbar-brand>img {
+    height: 60px;
+  }
 }
 
 .navbar-nav>.menu-item>.nav-link {

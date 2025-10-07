@@ -8,133 +8,119 @@
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
  * @package Bootscore
- * 
- * @version 5.2.0.0
+ * @version 6.1.0
  */
+
+// Exit if accessed directly
+defined('ABSPATH') || exit;
 
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
 <head>
-    <meta charset="<?php bloginfo('charset'); ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="profile" href="https://gmpg.org/xfn/11">
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_stylesheet_directory_uri(); ?>/img/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo get_stylesheet_directory_uri(); ?>/img/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo get_stylesheet_directory_uri(); ?>/img/favicon/favicon-16x16.png">
-    <link rel="manifest" href="<?php echo get_stylesheet_directory_uri(); ?>/img/favicon/site.webmanifest">
-    <link rel="mask-icon" href="<?php echo get_stylesheet_directory_uri(); ?>/img/favicon/safari-pinned-tab.svg" color="#0d6efd">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="theme-color" content="#ffffff">
-    <?php wp_head(); ?>
+  <meta charset="<?php bloginfo('charset'); ?>">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="profile" href="https://gmpg.org/xfn/11">
+  <?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
-    <?php wp_body_open(); ?>
-    <div id="page" class="site">
-        <header id="masthead" class="site-header d-print-none">
-            <div class="fixed-top bg-light border-bottom border-secondary border-opacity-25">
-                <nav id="nav-main" class="navbar navbar-expand-lg">
-                    <div class="container-fluid">
-                        <!-- Navbar Brand -->
-                        <a class="navbar-brand xs d-md-none" href="<?php echo esc_url(home_url()); ?>"><img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/img/logo/logo.png" alt="logo" class="logo xs"></a>
-                        <a class="navbar-brand md d-none d-md-block" href="<?php echo esc_url(home_url()); ?>"><img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/img/logo/logo.png" alt="logo" class="logo md"></a>
 
-                        <!-- Offcanvas Navbar -->
-                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-navbar">
-                            <div class="offcanvas-header bg-light">
-                                <span class="h5 mb-0"><?php esc_html_e('Menu', 'bootscore'); ?></span>
-                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                            </div>
+  <?php wp_body_open(); ?>
 
-                            <div class="offcanvas-body">
-                                <!-- Bootstrap 5 Nav Walker Main Menu -->
-                                <?php wp_nav_menu(array(
-                                    'theme_location' => 'main-menu',
-                                    'container' => false,
-                                    'menu_class' => '',
-                                    'fallback_cb' => '__return_false',
-                                    'items_wrap' => '<ul id="bootscore-navbar" class="navbar-nav ms-auto %2$s">%3$s</ul>',
-                                    'depth' => 2,
-                                    'walker' => new bootstrap_5_wp_nav_menu_walker()
-                                )); ?>
-                                <!-- Bootstrap 5 Nav Walker Main Menu End -->
-                            </div>
-                        </div>
+  <div id="page" class="site">
 
-                        <div class="header-actions d-flex align-items-center">
+    <!-- Skip Links -->
+    <a class="skip-link visually-hidden-focusable" href="#primary"><?php esc_html_e('Skip to content', 'bootscore'); ?></a>
+    <a class="skip-link visually-hidden-focusable" href="#footer"><?php esc_html_e('Skip to footer', 'bootscore'); ?></a>
 
-                            <!-- Top Nav Widget -->
-                            <div class="top-nav-widget">
-                                <?php if (is_active_sidebar('top-nav')) : ?>
-                                    <div>
-                                        <?php dynamic_sidebar('top-nav'); ?>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
+    <!-- Top Bar Widget -->
+    <?php if (is_active_sidebar('top-bar')) : ?>
+      <?php dynamic_sidebar('top-bar'); ?>
+    <?php endif; ?>
 
-                            <!-- Searchform Large -->
-                            <div class="d-none d-lg-block ms-1 ms-md-2 top-nav-search-lg">
-                                <?php if (is_active_sidebar('top-nav-search')) : ?>
+    <?php do_action('bootscore_before_masthead'); ?>
 
-                                    <div>
-                                        <?php dynamic_sidebar('top-nav-search'); ?>
-                                    </div>
+    <header id="masthead" class="<?= apply_filters('bootscore/class/header', 'sticky-top bg-body-tertiary'); ?> site-header">
 
-                                <?php endif; ?>
-                            </div>
+      <?php do_action('bootscore_after_masthead_open'); ?>
 
-                            <!-- Search Toggler Mobile -->
-                            <button class="btn btn-outline-secondary d-lg-none ms-1 ms-md-2 top-nav-search-md" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-search" aria-expanded="false" aria-controls="collapse-search">
-                                <i class="fa-solid fa-magnifying-glass"></i><span class="visually-hidden-focusable">Search</span>
-                            </button>
+      <nav id="nav-main" class="navbar <?= apply_filters('bootscore/class/header/navbar/breakpoint', 'navbar-expand-lg'); ?>">
 
-                            <!-- Mini Cart Toggler -->
-                            <!-- <button class="btn btn-outline-secondary ms-1 ms-md-2 position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-cart" aria-controls="offcanvas-cart">
-                                <i class="fa-solid fa-cart-shopping"></i><span class="visually-hidden-focusable">Cart</span>
-                                <?php /* if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
-                                $count = WC()->cart->cart_contents_count; */
-                                ?>
-                                <span class="cart-content">
-                                    <?php /* if ($count > 0) { 
-                                        echo esc_html($count);
-                                    }  */ ?></span>
-                                <?php /* } */ ?>
-                            </button> -->
+        <div class="<?= apply_filters('bootscore/class/container', 'container', 'header'); ?>">
 
-                            <!-- Navbar Toggler -->
-                            <button class="btn btn-outline-secondary d-lg-none ms-1 ms-md-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-navbar" aria-controls="offcanvas-navbar">
-                                <i class="fa-solid fa-bars"></i><span class="visually-hidden-focusable">Menu</span>
-                            </button>
+          <?php do_action('bootscore_before_navbar_brand'); ?>
 
-                        </div><!-- .header-actions -->
-                    </div><!-- .container -->
-                </nav><!-- .navbar -->
+          <!-- Navbar Brand -->
+          <a class="<?= apply_filters('bootscore/class/header/navbar-brand', 'navbar-brand'); ?>" href="<?= esc_url(home_url()); ?>">
+            <img src="<?= esc_url(apply_filters('bootscore/logo', get_stylesheet_directory_uri() . '/assets/img/logo/logo.png', 'default')); ?>" alt="<?php bloginfo('name'); ?> Logo" class="d-td-none">
+          </a>
 
-                <!-- Top Nav Search Mobile Collapse -->
-                <div class="collapse container d-lg-none" id="collapse-search">
-                    <?php if (is_active_sidebar('top-nav-search')) : ?>
-
-                        <div class="mb-2">
-                            <?php dynamic_sidebar('top-nav-search'); ?>
-                        </div>
-
-                    <?php endif; ?>
-                </div><!-- #collapse-search -->
-            </div><!-- .fixed-top .bg-light -->
-
-            <!-- offcanvas cart -->
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-cart">
-                <div class="offcanvas-header bg-light">
-                    <span class="h5 mb-0"><?php esc_html_e('Cart', 'bootscore'); ?></span>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body p-0">
-                    <div class="cart-list">
-                        <div class="widget_shopping_cart_content"><?php woocommerce_mini_cart(); ?></div>
-                    </div>
-                </div>
+          <!-- Offcanvas Navbar -->
+          <div class="offcanvas offcanvas-<?= apply_filters('bootscore/class/header/offcanvas/direction', 'end', 'menu'); ?>" tabindex="-1" id="offcanvas-navbar">
+            <div class="offcanvas-header <?= apply_filters('bootscore/class/offcanvas/header', '', 'menu'); ?>">
+              <span class="h5 offcanvas-title"><?= apply_filters('bootscore/offcanvas/navbar/title', __('Menu', 'bootscore')); ?></span>
+              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-        </header><!-- #masthead -->
+            <div class="offcanvas-body <?= apply_filters('bootscore/class/offcanvas/body', '', 'menu'); ?>">
+
+              <!-- Bootstrap 5 Nav Walker Main Menu -->
+              <?php get_template_part('template-parts/header/main-menu'); ?>
+
+              <!-- Top Nav 2 Widget -->
+              <?php if (is_active_sidebar('top-nav-2')) : ?>
+                <?php dynamic_sidebar('top-nav-2'); ?>
+              <?php endif; ?>
+
+            </div>
+          </div>
+
+          <div class="header-actions <?= apply_filters('bootscore/class/header-actions', 'd-flex align-items-center'); ?>">
+
+            <!-- Top Nav Widget -->
+            <?php if (is_active_sidebar('top-nav')) : ?>
+              <?php dynamic_sidebar('top-nav'); ?>
+            <?php endif; ?>
+
+            <?php
+            if (class_exists('WooCommerce')) :
+              get_template_part('template-parts/header/actions', 'woocommerce');
+            else :
+              get_template_part('template-parts/header/actions');
+            endif;
+            ?>
+
+            <!-- Navbar Toggler -->
+            <button class="<?= apply_filters('bootscore/class/header/button', 'btn btn-outline-secondary', 'nav-toggler'); ?> <?= apply_filters('bootscore/class/header/navbar/toggler/breakpoint', 'd-lg-none'); ?> <?= apply_filters('bootscore/class/header/action/spacer', 'ms-1 ms-md-2', 'nav-toggler'); ?> nav-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-navbar" aria-controls="offcanvas-navbar" aria-label="<?php esc_attr_e('Toggle main menu', 'bootscore'); ?>">
+              <?= apply_filters('bootscore/icon/menu', '<i class="fa-solid fa-bars"></i>'); ?> <span class="visually-hidden-focusable">Menu</span>
+            </button>
+
+            <?php do_action('bootscore_after_nav_toggler'); ?>
+
+          </div><!-- .header-actions -->
+
+        </div><!-- .container -->
+
+      </nav><!-- .navbar -->
+
+      <?php
+      if (class_exists('WooCommerce')) :
+        get_template_part('template-parts/header/collapse-search', 'woocommerce');
+      else :
+        get_template_part('template-parts/header/collapse-search');
+      endif;
+      ?>
+
+      <!-- Offcanvas User and Cart -->
+      <?php
+      if (class_exists('WooCommerce')) :
+        get_template_part('template-parts/header/offcanvas', 'woocommerce');
+      endif;
+      ?>
+
+      <?php do_action('bootscore_before_masthead_close'); ?>
+
+    </header><!-- #masthead -->
+
+    <?php do_action('bootscore_after_masthead'); ?>
