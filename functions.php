@@ -58,6 +58,15 @@ function bootscore_child_enqueue_styles()
   endif;
 }
 
+/**
+ * Header container class
+ */
+function change_header_container($string, $location)
+{
+  return ($location == "header") ? "container-fluid" : $string;
+}
+
+add_filter('bootscore/class/container', 'change_header_container', 10, 2);
 
 // Alert para páginas de imprenta
 function cookie_alert_imprenta()
@@ -812,8 +821,6 @@ function init_searchbox_convenios()
   echo '</div>'; // .col-auto
   echo '<div class="col-auto">';
   echo '<button class="btn btn-primary me-2" id="filtra-todos">Todos</button>';
-  echo '<button class="btn btn-success opacity-50 me-2" id="filtra-activos">Activos</button>';
-  echo '<button class="btn btn-danger opacity-50 me-2" id="filtra-inactivos">Inactivos</button>';
   echo '<button class="btn btn-info opacity-50" id="filtra-faconline">Factura Online</button>';
   echo '</div>'; // .col-auto
   echo '</div>'; // #searchbox-convenios.row
@@ -857,7 +864,14 @@ function loop_convenios_vigentes()
     'post_type' => 'convenio',
     'nopaging'  => true,
     'order'     => 'ASC',
-    'orderby'   => 'title'
+    'orderby'   => 'title',
+    'meta_query' => array(
+      array(
+        'key'     => 'situacion',
+        'value'   => 'activo',
+        'compare' => '='
+      )
+    )
   );
 
   $query = new WP_Query($args);
@@ -876,13 +890,7 @@ function loop_convenios_vigentes()
       $detalle = get_post_field('detalle_situacion');
       $factura_online = get_post_field('facturacion_online');
 
-      if ($situacion == "activo" && $factura_online == "activa"):
-        echo '<div class="col convenio activo fac-online">';
-      elseif ($situacion == "activo"):
-        echo '<div class="col convenio activo">';
-      else:
-        echo '<div class="col convenio inactivo">';
-      endif;
+      echo ($situacion == "activo" && $factura_online == "activa") ? '<div class="col convenio activo fac-online">' : '<div class="col convenio activo">';
 
       echo '<div class="card mb-4 overflow-hidden">';
       echo '<div class="row g-0">';
