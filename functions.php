@@ -1,60 +1,65 @@
 <?php
 
-// style and scripts
+/**
+ * Custom styles and scripts
+ */
+
 add_action('wp_enqueue_scripts', 'bootscore_child_enqueue_styles');
 function bootscore_child_enqueue_styles()
 {
+  $theme_ver = wp_get_theme()->get('Version');
+  $parent_theme_ver = wp_get_theme('bootscore')->get('Version');
 
-  // Compiled main.css
-  $modified_bootscoreChildCss = date('YmdHi', filemtime(get_stylesheet_directory() . '/css/main.css'));
-  wp_enqueue_style('main', get_stylesheet_directory_uri() . '/assets/css/main.css', array('parent-style'), $modified_bootscoreChildCss);
+  // Get modification time. Enqueue file with modification date to prevent browser from loading cached styles when file content changes. 
+  $modified_child_css = date('YmdHi', filemtime(get_stylesheet_directory() . '/assets/css/main.css'));
+  wp_enqueue_style('main', get_stylesheet_directory_uri() . '/assets/css/main.css', array('parent-style'), $modified_child_css);
 
   // style.css
-  wp_enqueue_style('parent-style', get_template_directory_uri() . '/style.css');
+  wp_enqueue_style('parent-style', get_template_directory_uri() . '/style.css', array(), $parent_theme_ver);
 
   // Slick Carousel CSS
-  wp_enqueue_style('slick', get_stylesheet_directory_uri() . '/css/slick/slick.css', array());
-  wp_enqueue_style('slick-theme', get_stylesheet_directory_uri() . '/css/slick/slick-theme.css', array('slick'));
+  wp_enqueue_style('slick-css', get_stylesheet_directory_uri() . '/css/slick/slick.css', array());
+  wp_enqueue_style('slick-theme', get_stylesheet_directory_uri() . '/css/slick/slick-theme.css', array('slick-css'));
 
   // Owl Carousel CSS
-  wp_enqueue_style('owl-carousel', get_stylesheet_directory_uri() . '/css/owl-carousel/owl.carousel.min.css', array());
-  wp_enqueue_style('owl-carousel-theme', get_stylesheet_directory_uri() . '/css/owl-carousel/owl.theme.default.min.css', array('owl-carousel'));
+  wp_enqueue_style('owl-carousel-css', get_stylesheet_directory_uri() . '/css/owl-carousel/owl.carousel.min.css', array());
+  wp_enqueue_style('owl-carousel-theme', get_stylesheet_directory_uri() . '/css/owl-carousel/owl.theme.default.min.css', array('owl-carousel-css'));
 
-  // Font de iconos personalizados
-  wp_enqueue_style('fopc-font', get_stylesheet_directory_uri() . '/assets/fonts/fopc-font/css/fopc-font.css', array());
+  // Custom icons
+  wp_enqueue_style('fopc-font', get_stylesheet_directory_uri() . '/assets/fonts/fopc-font/css/fopc-font.css', array(), $theme_ver);
 
   // Slick Carousel JS
-  wp_enqueue_script('slick', get_stylesheet_directory_uri() . '/assets/js/slick.min.js', array('jquery'), '', true);
+  wp_enqueue_script('slick-js', get_stylesheet_directory_uri() . '/assets/js/slick.min.js', array('jquery'), '', true);
 
   // Owl Carousel JS
-  wp_enqueue_script('owl-carousel', get_stylesheet_directory_uri() . '/assets/js/owl.carousel.min.js', array('jquery'), '', true);
+  wp_enqueue_script('owl-carousel-js', get_stylesheet_directory_uri() . '/assets/js/owl.carousel.min.js', array('jquery'), '', true);
 
   // custom.js
   // Get modification time. Enqueue file with modification date to prevent browser from loading cached scripts when file content changes. 
-  $modificated_CustomJS = date('YmdHi', filemtime(get_stylesheet_directory() . '/assets/js/custom.js'));
-  wp_enqueue_script('custom-js', get_stylesheet_directory_uri() . '/assets/js/custom.js', array('jquery'), $modificated_CustomJS, false, true);
+  $modified_custom_js = date('YmdHi', filemtime(get_stylesheet_directory() . '/assets/js/custom.js'));
+  wp_enqueue_script('custom-js', get_stylesheet_directory_uri() . '/assets/js/custom.js', array('jquery'), $modified_custom_js, true);
 
   // Manipulación de Accesos Rápidos en Front-Page y Animaciones CSS
   if (is_front_page()):
-    wp_enqueue_script('front-page-js', get_stylesheet_directory_uri() . '/assets/js/front-page.js', array(), '', true);
-    wp_enqueue_style('front-page-js', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css', array());
+    wp_enqueue_script('front-page-js', get_stylesheet_directory_uri() . '/assets/js/front-page.js', array(), $theme_ver, true);
+    wp_enqueue_style('animate-css', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css', array());
   endif;
 
-  // Filtro Beneficios
+  // Scripts específicos para ciertas páginas
   if (is_page('beneficios')):
-    wp_enqueue_script('beneficios', get_stylesheet_directory_uri() . '/assets/js/beneficios.js', array('jquery'), '', true);
+    wp_enqueue_script('beneficios', get_stylesheet_directory_uri() . '/assets/js/beneficios.js', array('jquery'), $theme_ver, true);
   endif;
 
   if (is_page('estado-convenios')):
-    wp_enqueue_script('searchbox-convenios', get_stylesheet_directory_uri() . '/assets/js/convenios.js', array('jquery'), '', true);
+    wp_enqueue_script('searchbox-convenios', get_stylesheet_directory_uri() . '/assets/js/convenios.js', array('jquery'), $theme_ver, true);
   endif;
 
   if (is_page(array('prestamos', 'subsidios', 'alta-baja-fopc', 'auditoria-apross'))):
-    wp_enqueue_script('fopc-tabs', get_stylesheet_directory_uri() . '/assets/js/tabs.js', array('bootstrap'), '', true);
+    wp_enqueue_script('fopc-tabs', get_stylesheet_directory_uri() . '/assets/js/tabs.js', array('bootstrap'), $theme_ver, true);
   endif;
 
   if (is_page('ultimo-mes-abonado')):
-    wp_enqueue_script('ultimo-mes', get_stylesheet_directory_uri() . '/assets/js/ultimo-mes.js', array('jquery'), '', true);
+    wp_enqueue_script('ultimo-mes', get_stylesheet_directory_uri() . '/assets/js/ultimo-mes.js', array('jquery'), $theme_ver, true);
   endif;
 }
 
@@ -68,18 +73,10 @@ function change_header_container($string, $location)
 
 add_filter('bootscore/class/container', 'change_header_container', 10, 2);
 
-// Alert para páginas de imprenta
-function cookie_alert_imprenta()
-{
-  if (is_woocommerce() && !isset($_COOKIE['alert_imprenta'])) {
-    setcookie('alert_imprenta', 'true', time() + 604800, '/');
-  }
-}
-
-add_action('wp', 'cookie_alert_imprenta');
-
-// Custom Sidebars
-if (!function_exists('custom_sidebars_init')) :
+/**
+ * Custom Sidebars
+ */
+if (!function_exists('custom_sidebars_init')) {
   function custom_sidebars_init()
   {
     register_sidebar(array(
@@ -161,17 +158,16 @@ if (!function_exists('custom_sidebars_init')) :
       'before_title'  => '<h2 class="widget-title card-title py-2">',
       'after_title'   => '</h2>',
     ));
-
-    // Sidebar End
   }
-
-endif;
+}
 
 add_action('widgets_init', 'custom_sidebars_init', 10, 3);
 
-// Custom Widgets
-if (!function_exists('custom_widgets_init')) :
+/**
+ * Custom Widgets
+ */
 
+if (!function_exists('custom_widgets_init')) {
   function custom_widgets_init()
   {
     // Top Nav
@@ -186,12 +182,15 @@ if (!function_exists('custom_widgets_init')) :
     ));
     // Top Nav End
   }
-endif;
+}
 
 add_action('widgets_init', 'custom_widgets_init', 11);
 
-// Register and init custom menus
-if (!function_exists('custom_menus_init')):
+/**
+ * Custom menus
+ */
+
+if (!function_exists('custom_menus_init')) {
   function custom_menus_init()
   {
     register_nav_menus(array(
@@ -202,13 +201,13 @@ if (!function_exists('custom_menus_init')):
       'sidebar-obras-sociales' => 'Sidebar Obras Sociales'
     ));
   }
-endif;
+}
 
 add_action('after_setup_theme', 'custom_menus_init');
 
-// ------------
-// Agrega clase "list-group-item" a los tags <li> de los menues en sidebar para matchear clase "list-group" del tag <ul>
-// ------------
+/**
+ * Custom classes for menu widgets (Bootstrap adaptation)
+ */
 function custom_menu_widget_class($classes, $item, $args)
 {
   if (
@@ -226,13 +225,11 @@ function custom_menu_widget_class($classes, $item, $args)
 
 add_filter('nav_menu_css_class', 'custom_menu_widget_class', 10, 4);
 
-// ------------
-// Agrega clase "link-light" a los tags <a> dentro de los <li> de los menues sidebar para matchear la clase bg-dark del widget
-// ------------
+/**
+ * Custom classes for <a> in menu widgets (Bootstrap adaptation)
+ */
 function custom_menu_widget_a_class($atts, $item, $args)
 {
-
-  // Revisa el punto de inserción de los menúes para verificar que sean sidebar
   if (
     $args->theme_location === 'archivo-nos' ||
     $args->theme_location === 'sidebar-dipe' ||
@@ -248,9 +245,10 @@ function custom_menu_widget_a_class($atts, $item, $args)
 
 add_filter('nav_menu_link_attributes', 'custom_menu_widget_a_class', 10, 3);
 
-// ------------
-// Shortcode para presentacion de custom-post-types
-// ------------
+/**
+ * Custom Post Type display shortcode
+ */
+
 function loop_custom_post_type($atts)
 {
   ob_start();
@@ -314,10 +312,10 @@ function loop_custom_post_type($atts)
 
 add_shortcode('show-cpt-posts', 'loop_custom_post_type');
 
+/**
+ * Incrementos de Aranceles y Novedades OS Shortcodes
+ */
 
-// ------------
-// Shortcode para presentación de últimos 10 incrementos de aranceles
-// ------------
 function loop_incremento_aranceles($atts)
 {
   ob_start();
@@ -391,9 +389,7 @@ function loop_incremento_aranceles($atts)
 
 add_shortcode('incremento-aranceles', 'loop_incremento_aranceles');
 
-// ============
-// Shortcode para display de incrementos en front-page
-// ============
+
 function loop_incremento_aranceles_front()
 {
   ob_start();
@@ -492,9 +488,7 @@ function loop_incremento_aranceles_front()
 
 add_shortcode('incremento-aranceles-front', 'loop_incremento_aranceles_front');
 
-// ------------
-// Shortcode para presentacion de Novedades OS en front-page
-// ------------
+
 function loop_novedades_os_front()
 {
   ob_start();
@@ -587,9 +581,10 @@ function loop_novedades_os_front()
 
 add_shortcode('novedades-os-front', 'loop_novedades_os_front');
 
-// ------------
-// Shortcode para presentacion de Circulos Odontologicos
-// ------------
+/**
+ * Circulos Odontologicos display shortcode
+ */
+
 function loop_circulos_odontologicos()
 {
   ob_start();
@@ -694,9 +689,10 @@ function incrementos_posts_columns($columns)
 
 add_filter('manage_incrementos_posts_columns', 'incrementos_posts_columns');
 
-// ----------
-// Columnas personalizadas para custom-post-types en área administrativa
-// ----------
+/**
+ * Custom columns in admin area for custom post types
+ */
+
 function incrementos_posts_custom_column($column, $post_id)
 {
   switch ($column) {
@@ -722,9 +718,6 @@ function incrementos_posts_custom_column($column, $post_id)
 
 add_action("manage_incrementos_posts_custom_column", 'incrementos_posts_custom_column', 10, 2);
 
-// ----------
-// Hacer las columnas personalizadas ordenables en la lista de posts de "incrementos"
-// ----------
 function incrementos_sortable_columns($columns)
 {
   $columns['obras_sociales'] = 'obras_sociales';
@@ -735,9 +728,10 @@ function incrementos_sortable_columns($columns)
 
 add_filter('manage_edit-incrementos_sortable_columns', 'incrementos_sortable_columns');
 
-// ----------
-// Agrega clase con slug de pagina a body-class
-// ----------
+/**
+ * Body classes
+ */
+
 function add_slug_body_class($classes)
 {
   global $post;
@@ -753,8 +747,9 @@ add_filter('body_class', 'add_slug_body_class');
 
 
 /**
- * Shortcode para visualizacion de Cursos y Congresos
+ * Cursos y Congresos display shortcode
  */
+
 function loop_cursos_congresos()
 {
   ob_start();
@@ -805,9 +800,9 @@ function loop_cursos_congresos()
 
 add_shortcode('cursos-congresos', 'loop_cursos_congresos');
 
-// ------------
-// Shortcode para searchbox de Convenios
-// ------------
+/**
+ * Display Convenios searchbox and list
+ */
 function init_searchbox_convenios()
 {
   ob_start();
@@ -832,9 +827,10 @@ function init_searchbox_convenios()
 
 add_shortcode('searchbox-convenios', 'init_searchbox_convenios');
 
-// ------------
-// Shortcode para searchbox de Último mes
-// ------------
+/**
+ * Display Ultimo Mes Abonado searchbox and list
+ */
+
 function init_searchbox_ultimo_mes()
 {
   ob_start();
@@ -853,9 +849,10 @@ function init_searchbox_ultimo_mes()
 
 add_shortcode('searchbox-ultimo-mes', 'init_searchbox_ultimo_mes');
 
-// ------------
-// Shortcode para presentacion de convenios vigentes
-// ------------
+/**
+ * Convenios Vigentes display shortcode
+ */
+
 function loop_convenios_vigentes()
 {
   ob_start();
@@ -931,9 +928,10 @@ function loop_convenios_vigentes()
 
 add_shortcode('convenios-vigentes', 'loop_convenios_vigentes');
 
-// ------------
-// Shortcode para listado de convenios vigentes
-// ------------
+/**
+ * Convenios Listado completo display shortcode
+ */
+
 function loop_listado_convenios()
 {
   ob_start();
@@ -991,9 +989,10 @@ function loop_listado_convenios()
 
 add_shortcode('listado-convenios', 'loop_listado_convenios');
 
-//================//
-// Shortcode de carousel logos obras sociales
-//================//
+/**
+ * Shortcode de carousel logos obras sociales
+ */
+
 function carousel_obras_sociales_init()
 {
   ob_start();
@@ -1022,9 +1021,9 @@ function carousel_obras_sociales_init()
 
 add_shortcode('carousel-obras-sociales', 'carousel_obras_sociales_init');
 
-//================//
-// Shortcode de carousel logos circulos odontologicos
-//================//
+/**
+ * Shortcode de carousel logos circulos odontologicos
+ */
 function carousel_circulos_odontologicos_init()
 {
   ob_start();
@@ -1053,9 +1052,9 @@ function carousel_circulos_odontologicos_init()
 
 add_shortcode('carousel-circulos-odontologicos', 'carousel_circulos_odontologicos_init');
 
-// ========================================= //
-// Shortcode para presentacion de Clasificados
-// ========================================= //
+/**
+ * Clasificados display shortcode
+ */
 function loop_fed_clasificados()
 {
   ob_start();
@@ -1121,9 +1120,9 @@ function loop_fed_clasificados()
 
 add_shortcode('fed-clasificados', 'loop_fed_clasificados');
 
-// ------------
-// Shortcode filtro de Incrementos
-// ------------
+/**
+ * Shortcode filtro de Incrementos
+ */
 function init_searchbox_incrementos()
 {
   ob_start();
@@ -1175,9 +1174,9 @@ function init_searchbox_incrementos()
 add_shortcode('searchbox-incrementos', 'init_searchbox_incrementos');
 
 
-// ------------
-// Shortcode filtro de Novedades
-// ------------
+/**
+ * Shortcode filtro de Novedades OS
+ */
 function init_searchbox_novedades()
 {
   ob_start();
@@ -1228,9 +1227,9 @@ function init_searchbox_novedades()
 
 add_shortcode('searchbox-novedades', 'init_searchbox_novedades');
 
-// ------------
-// Shortcode para noticias en front-page
-// ------------
+/**
+ * Noticias front display shortcode
+ */
 function init_noticias_front($atts)
 {
   ob_start();
@@ -1290,7 +1289,9 @@ function init_noticias_front($atts)
 add_shortcode('noticias-front', 'init_noticias_front');
 
 
-// Campo personalizado de subida de archivos en Woocommerce
+/**
+ * WooCommerce Customizations 
+ */
 add_action('woocommerce_after_order_notes', 'custom_checkout_file_upload');
 
 function custom_checkout_file_upload()
@@ -1409,8 +1410,10 @@ function attach_custom_img_files_admin_email($attachments, $email_id, $order)
   return $attachments;
 }
 
+/**
+ * Custom class for product categories widget links (Bootstrap adaptation)
+ */
 
-// Filtro para añadir una clase a los elementos <a> del widget "Categorías de producto"
 function custom_product_cat_class($output, $args)
 {
   if (is_active_widget(false, false, 'woocommerce_product_categories', true) && isset($args['taxonomy']) && $args['taxonomy'] === 'product_cat') {
@@ -1420,5 +1423,3 @@ function custom_product_cat_class($output, $args)
 }
 
 add_filter('wp_list_categories', 'custom_product_cat_class', 10, 2);
-
-// WooCommerce END

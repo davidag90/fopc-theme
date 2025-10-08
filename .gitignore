@@ -9,3 +9,6 @@ fopc-theme.code-workspace
 assets/css/main.css
 dist-theme.sh
 dist
+assets/css/editor.css
+assets/css/main.css
+assets/css/main.css.map
